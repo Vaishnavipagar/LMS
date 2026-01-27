@@ -21,6 +21,7 @@ export default function Navbar() {
     { label: "Stats", path: "/#stats" },
     { label: "Reviews", path: "/#reviews" },
     { label: "Faculty", path: "/#faculty" },
+    
   ];
 
   const handleNavClick = (path) => {
@@ -48,9 +49,9 @@ export default function Navbar() {
           className="
             pointer-events-auto
             flex items-center justify-between
-            min-w-[1200px] max-[1100px]:min-w-[90%]
-            h-[70px]
-            px-8 
+            w-[95%] sm:w-[90%] lg:min-w-[900px] xl:min-w-[1100px]
+            h-[60px] sm:h-[70px]
+            px-4 sm:px-8 
             rounded-full
             bg-white/80
             backdrop-blur-xl
@@ -64,7 +65,7 @@ export default function Navbar() {
           <div
             onClick={() => navigate("/#home")}
             className={`
-              cursor-pointer font-extrabold tracking-tight text-slate-900 
+              cursor-pointer font-extrabold tracking-tight text-slate-900 text-sm sm:text-base
               transition-all duration-700 delay-100
               ${loaded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}
             `}

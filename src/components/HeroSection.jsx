@@ -15,21 +15,21 @@ export default function HeroSection() {
         
         {/* === LEFT COLUMN: TEXT CONTENT (Moved to Left) === */}
         <div className="w-full lg:w-[45%] text-center lg:text-left relative z-30 order-1 lg:order-1 mt-8 lg:mt-0">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-4 sm:mb-6">
             Master In<br />
             <span className="text-gray-500">Linux & Cloud</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-slate-500 mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
+          <p className="text-base sm:text-lg md:text-xl text-slate-500 mb-6 sm:mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0 px-2 sm:px-0">
             The Linux School is your premier destination for hands-on DevOps training. 
             From Kernel basics to Kubernetes architecture, we build industry-ready engineers.
           </p>
 
           <button className="
             bg-slate-900 hover:bg-slate-800
-            text-white text-[18px] font-bold
-            px-10 py-4
-            rounded-2xl
+            text-white text-sm sm:text-base md:text-[18px] font-bold
+            px-6 sm:px-10 py-3 sm:py-4
+            rounded-xl sm:rounded-2xl
             shadow-lg shadow-slate-200
             transition-all duration-300
             hover:-translate-y-1
@@ -40,7 +40,7 @@ export default function HeroSection() {
         </div>
 
         {/* === RIGHT COLUMN: GRAPHIC CONTAINER (Moved to Right) === */}
-        <div className="relative w-full lg:w-[55%] h-[380px] md:h-[500px] order-2 lg:order-2 scale-90 md:scale-100">
+        <div className="relative w-full lg:w-[55%] h-[280px] sm:h-[350px] md:h-[500px] order-2 lg:order-2 scale-[0.65] sm:scale-75 md:scale-100">
           
           {/* BACKGROUND LINES (SVG TREE STRUCTURE) */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none visible overflow-visible">

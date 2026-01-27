@@ -29,16 +29,16 @@ export default function BadgesSection() {
       <div className="max-w-7xl mx-auto relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16">
         
         {/* LEFT SIDE: ORBIT ANIMATION (INCREASED SIZE) */}
-        <div className="flex-1 flex justify-center items-center w-full min-h-[500px] lg:min-w-[500px]">
+        <div className="flex-1 flex justify-center items-center w-full min-h-[320px] sm:min-h-[400px] lg:min-w-[500px]">
           {/* Container Scaled Up 30%: 
              Mobile: 280px -> 360px
              Desktop: 360px -> 470px
           */}
-          <div className="relative w-[360px] h-[360px] md:w-[470px] md:h-[470px] flex justify-center items-center">
+          <div className="relative w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[470px] md:h-[470px] flex justify-center items-center">
             
             {/* Center Text: Scaled up to w-40 (160px) to match larger orbit */}
-            <div className="absolute z-10 w-40 h-40 bg-white/80 border border-slate-200 backdrop-blur-md rounded-full flex justify-center items-center shadow-xl shadow-slate-200">
-              <h2 className="text-3xl font-black tracking-widest bg-gradient-to-br from-slate-900 to-slate-500 bg-clip-text text-transparent">
+            <div className="absolute z-10 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-white/80 border border-slate-200 backdrop-blur-md rounded-full flex justify-center items-center shadow-xl shadow-slate-200">
+              <h2 className="text-lg sm:text-2xl md:text-3xl font-black tracking-widest bg-gradient-to-br from-slate-900 to-slate-500 bg-clip-text text-transparent">
                 LINUX
               </h2>
             </div>
@@ -49,7 +49,7 @@ export default function BadgesSection() {
                 <div 
                   key={index} 
                   // Icon wrappers slightly larger for balance
-                  className="absolute top-1/2 left-1/2 w-[50px] h-[50px] md:w-[64px] md:h-[64px] -mt-[25px] -ml-[25px] md:-mt-[32px] md:-ml-[32px]"
+                  className="absolute top-1/2 left-1/2 w-[36px] h-[36px] sm:w-[44px] sm:h-[44px] md:w-[64px] md:h-[64px] -mt-[18px] -ml-[18px] sm:-mt-[22px] sm:-ml-[22px] md:-mt-[32px] md:-ml-[32px]"
                 >
                   <div 
                      className="w-full h-full flex items-center justify-center transition-transform duration-300 hover:scale-125"
@@ -58,7 +58,7 @@ export default function BadgesSection() {
                         top: '50%',
                         left: '50%',
                         // Radius (translation) increased to match 30% larger container (approx 180px mobile, 235px desktop)
-                        transform: `rotate(${index * (360 / tools.length)}deg) translate(clamp(180px, 20vw, 235px))`, 
+                        transform: `rotate(${index * (360 / tools.length)}deg) translate(clamp(120px, 18vw, 235px))`, 
                         marginTop: '-50%',
                         marginLeft: '-50%',
                         width: '100%',
@@ -85,26 +85,26 @@ export default function BadgesSection() {
 
         {/* RIGHT SIDE: SUMMARY TEXT */}
         <motion.div 
-          className="flex-1 w-full max-w-[550px] bg-white border border-slate-200 rounded-3xl p-10 shadow-2xl shadow-slate-200/60"
+          className="flex-1 w-full max-w-[550px] bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl shadow-slate-200/60"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="mb-6">
-            <span className="inline-block text-sm font-bold text-gray-600 uppercase tracking-wider mb-3">
+          <div className="mb-4 sm:mb-6">
+            <span className="inline-block text-xs sm:text-sm font-bold text-gray-600 uppercase tracking-wider mb-2 sm:mb-3">
               About Us
             </span>
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
               The <span className="text-gray-500">Linux School</span>
             </h2>
           </div>
 
-          <p className="text-lg text-slate-700 font-medium leading-relaxed mb-5">
+          <p className="text-base sm:text-lg text-slate-700 font-medium leading-relaxed mb-4 sm:mb-5">
             Bridging the gap between academic learning and industry demands through hands-on, project-centric training.
           </p>
           
-          <p className="text-base text-slate-500 leading-relaxed mb-8">
+          <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-6 sm:mb-8">
             We don't just teach commands; we build careers. Our curriculum is designed by industry veterans to forge experts in Linux, Cloud, and DevOps.
           </p>
 

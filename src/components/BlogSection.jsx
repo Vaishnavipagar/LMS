@@ -86,7 +86,7 @@ export default function BlogSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-24 px-6 bg-white overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-white overflow-hidden"
       // Same consistent background pattern
       style={{
         backgroundImage: "radial-gradient(#cbd5e1 1px, transparent 1px)",
@@ -96,12 +96,12 @@ export default function BlogSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* HEADER */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16 max-w-3xl mx-auto px-2">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 sm:mb-6 tracking-tight"
           >
             The Linux  <span className="text-gray-500 bg-clip-text ">School Blog</span>
           </motion.h2>
@@ -109,14 +109,14 @@ export default function BlogSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg text-slate-500 font-medium"
+            className="text-sm sm:text-base lg:text-lg text-slate-500 font-medium"
           >
             Linux • React • DevOps • System Engineering
           </motion.p>
         </div>
 
         {/* BENTO GRID LAYOUT */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
           {posts.map((post, index) => (
             <motion.div
               key={post.id}
@@ -129,11 +129,11 @@ export default function BlogSection() {
               }}
               whileHover={{ y: -8 }}
               // Apple-style Card: Rounded-32px, White BG, Slate Border, Soft Shadows
-              className="group flex flex-col bg-white rounded-[32px] border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200 hover:border-slate-300"
+              className="group flex flex-col bg-white rounded-[24px] sm:rounded-[32px] border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200 hover:border-slate-300"
             >
               
               {/* IMAGE AREA */}
-              <div className="h-48 w-full relative overflow-hidden bg-slate-50 border-b border-slate-100 p-6 flex items-center justify-center">
+              <div className="h-36 sm:h-40 md:h-48 w-full relative overflow-hidden bg-slate-50 border-b border-slate-100 p-4 sm:p-6 flex items-center justify-center">
                 <img 
                   src={post.image} 
                   alt={post.title} 
@@ -147,13 +147,13 @@ export default function BlogSection() {
               </div>
 
               {/* CONTENT AREA */}
-              <div className="p-8 flex flex-col flex-grow">
-                <div className="flex justify-between items-center mb-4 text-sm font-semibold text-slate-400">
+              <div className="p-5 sm:p-6 md:p-8 flex flex-col flex-grow">
+                <div className="flex justify-between items-center mb-3 sm:mb-4 text-xs sm:text-sm font-semibold text-slate-400">
                   <span>{post.date}</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-slate-800 transition-colors">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 leading-tight group-hover:text-slate-800 transition-colors">
                   {post.title}
                 </h3>
 

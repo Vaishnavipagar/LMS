@@ -44,7 +44,7 @@ const batches = [
 export default function UpcomingBatches() {
   return (
     <section 
-      className="relative py-24 px-6 bg-white overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-white overflow-hidden"
       style={{
         backgroundImage: "radial-gradient(#cbd5e1 1px, transparent 1px)",
         backgroundSize: "40px 40px"
@@ -53,9 +53,9 @@ export default function UpcomingBatches() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
           <motion.h2
-            className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4 tracking-tight"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -63,13 +63,13 @@ export default function UpcomingBatches() {
           >
             Upcoming <span className="text-gray-500 bg-clip-text">Live Cohorts</span>
           </motion.h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto px-2">
             Join our live interactive sessions. Limited seats available per batch.
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 justify-items-center">
           {batches.map((batch, index) => {
             const fillPercentage = (batch.seatsFilled / batch.seatsTotal) * 100;
             
@@ -78,7 +78,7 @@ export default function UpcomingBatches() {
                 key={batch.id}
                 // REMOVED: p-[2px] and overflow-hidden related to the spinner
                 // ADDED: Simple hover lift effect
-                className="w-full max-w-[380px] group transition-transform duration-300 hover:-translate-y-2"
+                className="w-full max-w-[340px] sm:max-w-[360px] md:max-w-[380px] group transition-transform duration-300 hover:-translate-y-2"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -89,22 +89,22 @@ export default function UpcomingBatches() {
                 */}
 
                 {/* CARD CONTENT */}
-                <div className="relative bg-white h-full rounded-2xl p-8 flex flex-col z-10 border border-slate-200 shadow-sm hover:shadow-xl transition-shadow duration-300">
+                <div className="relative bg-white h-full rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 flex flex-col z-10 border border-slate-200 shadow-sm hover:shadow-xl transition-shadow duration-300">
                   
                   {/* Badge Row */}
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-600 px-3 py-1.5 rounded-md">
+                  <div className="flex justify-between items-center mb-4 sm:mb-6">
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-600 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md">
                       {batch.type}
                     </span>
                     {fillPercentage > 80 && (
-                      <span className="text-xs font-bold text-red-500 animate-pulse flex items-center gap-1">
+                      <span className="text-[10px] sm:text-xs font-bold text-red-500 animate-pulse flex items-center gap-1">
                         🔥 {batch.status}
                       </span>
                     )}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-extrabold text-slate-900 mb-6">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-slate-900 mb-4 sm:mb-6">
                     {batch.title}
                   </h3>
 

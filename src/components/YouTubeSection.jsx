@@ -58,8 +58,8 @@ export default function YouTubeSection() {
         backgroundSize: "40px 40px"
       }}
     >
-      <div className="text-center mb-10 px-4">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+      <div className="text-center mb-8 sm:mb-10 px-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
           Our Videos
         </h2>
       </div>
@@ -77,25 +77,25 @@ export default function YouTubeSection() {
             } : {})
           }}
         >
-          <div className="mb-6">
-            <h3 className="text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight mb-4">
+          <div className="mb-4 sm:mb-6">
+            <h3 className="text-xl sm:text-2xl lg:text-4xl font-extrabold text-slate-900 leading-tight mb-3 sm:mb-4">
               Learn. Build. <br />
               <span className="text-gray-500">
                 Become Job-Ready.
               </span>
             </h3>
-            <p className="text-slate-600 text-lg leading-relaxed">
+            <p className="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed">
               High-quality YouTube courses to master Linux, DevOps, React, and more 
               by building real projects.
             </p>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <button className="
             bg-slate-900 hover:bg-slate-800
-            text-white text-[18px] font-bold
-            px-10 py-4
-            rounded-2xl
+            text-white text-sm sm:text-base lg:text-[18px] font-bold
+            px-6 sm:px-8 lg:px-10 py-3 sm:py-4
+            rounded-xl sm:rounded-2xl
             shadow-lg shadow-slate-200
             transition-all duration-300
             hover:-translate-y-1
@@ -128,7 +128,7 @@ export default function YouTubeSection() {
                 href={video.link}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex-shrink-0 w-[320px] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-300 hover:border-slate-300"
+                className="group flex-shrink-0 w-[260px] sm:w-[280px] md:w-[320px] bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-300 hover:border-slate-300"
               >
                 <div className="relative h-[180px] overflow-hidden">
                   <img 

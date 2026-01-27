@@ -110,7 +110,7 @@ export default function StatsSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-24 px-6 bg-white overflow-hidden" 
+      className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-white overflow-hidden" 
       style={{
         backgroundImage: "radial-gradient(#cbd5e1 1px, transparent 1px)",
         backgroundSize: "40px 40px"
@@ -119,12 +119,12 @@ export default function StatsSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* HEADER */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16 max-w-3xl mx-auto px-2">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 sm:mb-6 tracking-tight"
           >
             Built for <span className="text-gray-500">Scale & Success</span>
           </motion.h2>
@@ -132,14 +132,14 @@ export default function StatsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg text-slate-500"
+            className="text-sm sm:text-base lg:text-lg text-slate-500"
           >
             Thousands of engineers, from students to enterprises, use TheLinuxSchool to master their craft.
           </motion.p>
         </div>
 
         {/* BENTO GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.id}
@@ -153,38 +153,38 @@ export default function StatsSection() {
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
               // UPDATED SHADOWS TO MATCH FACULTY SECTION:
               // Removed shadow-sm and indigo shadow. Added hover:shadow-2xl, hover:shadow-slate-200
-              className="group bg-white rounded-[32px] p-8 border border-slate-200 relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200 hover:border-slate-300"
+              className="group bg-white rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 md:p-8 border border-slate-200 relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200 hover:border-slate-300"
             >
               {/* TOP ROW: ICON & GRAPHIC ELEMENT */}
-              <div className="flex justify-between items-start mb-8">
+              <div className="flex justify-between items-start mb-5 sm:mb-6 md:mb-8">
                 {/* Icon Box */}
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${stat.color} transition-transform duration-300 group-hover:scale-110`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center ${stat.color} transition-transform duration-300 group-hover:scale-110`}>
                   {stat.icon}
                 </div>
 
                 {/* Decorative Pill */}
-                <div className="bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
-                  <div className="flex items-center gap-2">
+                <div className="bg-slate-50 px-2 sm:px-3 py-1 rounded-full border border-slate-100">
+                  <div className="flex items-center gap-1 sm:gap-2">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                     </span>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live</span>
+                    <span className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live</span>
                   </div>
                 </div>
               </div>
 
               {/* STAT NUMBER */}
-              <h3 className="text-5xl font-black text-slate-900 mb-4 tracking-tighter">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-3 sm:mb-4 tracking-tighter">
                 <CountUp value={stat.value} suffix={stat.suffix} trigger={trigger} />
               </h3>
 
               {/* TEXT CONTENT */}
               <div>
-                <h4 className="text-xl font-bold text-slate-800 mb-2">
+                <h4 className="text-lg sm:text-xl font-bold text-slate-800 mb-1 sm:mb-2">
                   {stat.title}
                 </h4>
-                <p className="text-slate-500 text-sm leading-relaxed font-medium">
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
                   {stat.desc}
                 </p>
               </div>

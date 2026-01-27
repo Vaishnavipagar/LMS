@@ -183,7 +183,7 @@ export default function WhyLinuxSection() {
           </motion.div>
 
           <motion.h2 
-            className="text-5xl md:text-7xl font-black text-slate-900 mb-8 tracking-tighter leading-[1.1]"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-slate-900 mb-6 sm:mb-8 tracking-tighter leading-[1.1]"
             variants={textVariants}
           >
             Why <br />
@@ -223,7 +223,7 @@ export default function WhyLinuxSection() {
 
         {/* ================= RIGHT CONTENT (GLASS CARD STACK) ================= */}
         <div
-          className="relative h-[500px] w-full flex justify-center lg:justify-end items-center perspective-1000"
+          className="relative h-[400px] sm:h-[450px] md:h-[500px] w-full flex justify-center lg:justify-end items-center perspective-1000"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -232,13 +232,13 @@ export default function WhyLinuxSection() {
               <motion.div
                 key={card.title}
                 className={`
-                  absolute w-full max-w-[460px] p-8 md:p-10
-                  rounded-[32px] 
+                  absolute w-[90%] sm:w-full max-w-[320px] sm:max-w-[380px] md:max-w-[460px] p-5 sm:p-7 md:p-10
+                  rounded-[24px] sm:rounded-[32px] 
                   bg-white/95 backdrop-blur-xl
-                  border-l-[6px] ${card.borderClass} border-y border-r border-slate-100
+                  border-l-[4px] sm:border-l-[6px] ${card.borderClass} border-y border-r border-slate-100
                   shadow-2xl shadow-slate-200/60
                   cursor-grab active:cursor-grabbing
-                  flex flex-col gap-6
+                  flex flex-col gap-4 sm:gap-6
                 `}
                 
                 // Drag Logic
@@ -255,16 +255,16 @@ export default function WhyLinuxSection() {
                 layout
               >
                 {/* Header: Icon + Title */}
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-3 sm:gap-5">
                   <div className={`
-                    w-16 h-16 rounded-2xl flex items-center justify-center text-3xl 
+                    w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl md:text-3xl 
                     ${card.colorClass} shadow-lg ${card.shadowClass}
                     transition-transform duration-300 group-hover:scale-110
                   `}>
                     {card.icon}
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-slate-900 leading-tight">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 leading-tight">
                       {card.title}
                     </h3>
                   </div>
@@ -274,7 +274,7 @@ export default function WhyLinuxSection() {
                 <div className="h-px w-full bg-slate-100" />
                 
                 {/* Description */}
-                <p className="text-slate-600 text-lg leading-relaxed font-medium">
+                <p className="text-slate-600 text-sm sm:text-base md:text-lg leading-relaxed font-medium">
                   {card.desc}
                 </p>
 

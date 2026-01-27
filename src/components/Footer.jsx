@@ -75,8 +75,8 @@ export default function Footer() {
         "
       />
 
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6">
-        <div className="grid grid-cols-4 gap-8 pb-[44px] max-[900px]:grid-cols-2 max-[600px]:grid-cols-1">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-[44px]">
           {/* Column 1 */}
           <motion.div
             variants={columnAnim(0.1)}
@@ -86,7 +86,7 @@ export default function Footer() {
           >
             <div
               className="
-                text-[22px] font-extrabold tracking-wide text-white
+                text-lg sm:text-[22px] font-extrabold tracking-wide text-white
                 transition-all duration-300
                 hover:scale-105 hover:text-blue-500
                 hover:shadow-[0_0_12px_rgba(37,99,235,0.5)]

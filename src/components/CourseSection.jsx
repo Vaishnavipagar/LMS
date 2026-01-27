@@ -85,8 +85,8 @@ export default function CourseSection() {
       `}</style>
       
       {/* CENTRED TITLE */}
-      <div className="text-center mb-12 px-4">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+      <div className="text-center mb-8 sm:mb-12 px-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
           Explore Courses
         </h2>
       </div>
@@ -104,19 +104,19 @@ export default function CourseSection() {
             } : {})
           }}
         >
-          <div className="mb-8">
-            <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-[1.1] mb-5">
+          <div className="mb-6 sm:mb-8">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.1] mb-4 sm:mb-5">
               Master <br />
               <span className="text-gray-500">
                 Industry Skills
               </span>
             </h3>
-            <p className="text-slate-600 text-lg leading-relaxed mb-8">
+            <p className="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8">
               From Linux to DevOps, Frontend to System Design — get hands-on experience 
               with our project-based curriculum.
             </p>
             
-            <button className="px-8 py-3.5 rounded-xl bg-slate-900 text-white font-semibold transition-all duration-300 hover:bg-slate-800 hover:scale-105 hover:shadow-xl hover:shadow-slate-300">
+            <button className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-slate-900 text-white font-semibold text-sm sm:text-base transition-all duration-300 hover:bg-slate-800 hover:scale-105 hover:shadow-xl hover:shadow-slate-300">
               View All Courses →
             </button>
           </div>
@@ -145,7 +145,7 @@ export default function CourseSection() {
             {courses.map((course, index) => (
               <div 
                 key={index} 
-                className="flex-shrink-0 w-[340px] bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-300 hover:border-indigo-200"
+                className="flex-shrink-0 w-[280px] sm:w-[300px] md:w-[340px] bg-white border border-slate-200 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-300 hover:border-indigo-200"
               >
                 {/* Image Header */}
                 <div className="relative h-[180px] w-full">

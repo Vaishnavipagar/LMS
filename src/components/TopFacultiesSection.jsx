@@ -44,7 +44,7 @@ const facultyData = [
 export default function FacultySection() {
   return (
     <section 
-      className="relative py-24 px-6 bg-white overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-white overflow-hidden"
       // Dot pattern changed to light gray (#cbd5e1) to be visible on white
       style={{
         backgroundImage: "radial-gradient(#cbd5e1 1px, transparent 1px)",
@@ -54,9 +54,9 @@ export default function FacultySection() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
           <motion.h2
-            className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4 tracking-tight"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -65,7 +65,7 @@ export default function FacultySection() {
             Meet Our <span className="text-gray-500">Mentors</span>
           </motion.h2>
           <motion.p
-            className="text-lg text-slate-600 max-w-2xl mx-auto"
+            className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto px-2"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -76,12 +76,12 @@ export default function FacultySection() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 justify-items-center">
           {facultyData.map((faculty, index) => (
             <motion.div
               key={faculty.id}
               // Card: White bg, light border, subtle shadow
-              className="group w-full max-w-[320px] bg-white border border-slate-200 rounded-3xl p-10 text-center relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200 hover:border-slate-300 hover:-translate-y-2"
+              className="group w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-center relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-slate-200 hover:border-slate-300 hover:-translate-y-2"
               initial={{ opacity: 0, scale: 0.8, y: 50 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               transition={{
@@ -94,7 +94,7 @@ export default function FacultySection() {
             >
               {/* Image Circle with Glow */}
               <div 
-                className="w-[120px] h-[120px] mx-auto mb-6 rounded-full p-1 border-[3px] relative"
+                className="w-[90px] h-[90px] sm:w-[100px] sm:h-[100px] md:w-[120px] md:h-[120px] mx-auto mb-4 sm:mb-6 rounded-full p-1 border-[3px] relative"
                 style={{ borderColor: faculty.color }}
               >
                 <img 
@@ -110,14 +110,14 @@ export default function FacultySection() {
               </div>
 
               {/* Info */}
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">{faculty.name}</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-1 sm:mb-2">{faculty.name}</h3>
               <span 
-                className="block text-sm font-bold uppercase tracking-wide mb-4"
+                className="block text-xs sm:text-sm font-bold uppercase tracking-wide mb-3 sm:mb-4"
                 style={{ color: faculty.color }}
               >
                 {faculty.role}
               </span>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                 {faculty.bio}
               </p>
 
