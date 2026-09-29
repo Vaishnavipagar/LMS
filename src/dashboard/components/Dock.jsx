@@ -1,13 +1,63 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
 import { ALL_APPS } from "../constants";
+import { useUser } from "@clerk/clerk-react"; // ⭐ ADDED
 
-// Define the apps to show in dock (in order)
-const DOCK_APPS = ["courses", "mycourses", "badges", "certificates", "notes", "word", "settings", "attendance"];
+// BASE APPS (without admin)
+const BASE_APPS = [
+  "courses",
+  "mycourses",
+  "badges",
+  "certificates",
+  "notes",
+  "word",
+  "settings",
+  "attendance"
+];
 
 export default function Dock({ windows, onOpenApp, isMobile }) {
+
   const dockRef = useRef(null);
   const [mouseX, setMouseX] = useState(null);
+
+  const { user } = useUser();              // ⭐ ADDED
+  const [role, setRole] = useState("student"); // ⭐ ADDED
+
+  /* ================= ROLE CHECK ================= */
+
+  useEffect(() => {
+
+    const checkRole = async () => {
+
+      if (!user?.id) return;
+
+      try {
+
+        const res = await fetch(
+          `http://localhost/linux/backend/api/admin/check_role.php?clerk_id=${user.id}`
+        );
+
+        const data = await res.json();
+
+        if (data.success) {
+          setRole(data.role);
+        }
+
+      } catch (err) {
+        console.error("Role check failed", err);
+      }
+
+    };
+
+    checkRole();
+
+  }, [user]);
+
+  /* ================= DOCK APPS ================= */
+
+  const DOCK_APPS = role === "admin"
+    ? [...BASE_APPS, "admin"]
+    : BASE_APPS;
 
   return (
     <motion.div
@@ -37,7 +87,6 @@ export default function Dock({ windows, onOpenApp, isMobile }) {
           border border-white/50
           shadow-[0_8px_32px_rgba(0,0,0,0.12)]
         `}
-        style={isMobile ? { WebkitOverflowScrolling: 'touch' } : {}}
       >
         {DOCK_APPS.map((appKey) => (
           <DockIcon
@@ -57,6 +106,7 @@ export default function Dock({ windows, onOpenApp, isMobile }) {
 }
 
 function DockIcon({ appKey, app, dockRef, mouseX, windows, onOpenApp, isMobile }) {
+
   const ref = useRef(null);
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -66,17 +116,21 @@ function DockIcon({ appKey, app, dockRef, mouseX, windows, onOpenApp, isMobile }
     (w) => w.type === appKey && !w.minimized
   );
 
-  // Desktop magnification effect (disabled on mobile)
   let distance = 9999;
+
   if (!isMobile && mouseX && ref.current) {
+
     const rect = ref.current.getBoundingClientRect();
     const iconCenter = rect.left + rect.width / 2;
+
     distance = Math.abs(mouseX - iconCenter);
+
   }
 
   const baseSize = isMobile ? 40 : 44;
   const maxScale = isMobile ? 1 : 1.5;
   const scaleValue = isMobile ? 1 : Math.max(1, maxScale - distance / 100);
+
   const spring = useSpring(scaleValue, { stiffness: 400, damping: 25 });
   const y = useTransform(spring, [1, maxScale], [0, -12]);
 
@@ -90,7 +144,7 @@ function DockIcon({ appKey, app, dockRef, mouseX, windows, onOpenApp, isMobile }
       onMouseLeave={() => setShowTooltip(false)}
       style={{ y: isMobile ? 0 : y }}
     >
-      {/* Tooltip - desktop only */}
+
       {showTooltip && !isMobile && (
         <motion.div
           initial={{ opacity: 0, y: 5 }}
@@ -98,7 +152,6 @@ function DockIcon({ appKey, app, dockRef, mouseX, windows, onOpenApp, isMobile }
           className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-slate-800 text-white text-xs rounded-lg whitespace-nowrap shadow-lg z-50"
         >
           {app.title}
-          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-800 rotate-45" />
         </motion.div>
       )}
 
@@ -106,42 +159,32 @@ function DockIcon({ appKey, app, dockRef, mouseX, windows, onOpenApp, isMobile }
         onClick={() => onOpenApp(appKey)}
         style={{ scale: isMobile ? 1 : spring }}
         whileTap={{ scale: 0.9 }}
-        className="relative block"
       >
         <motion.div
-          className={`flex flex-col items-center justify-center rounded-xl transition-all border ${
+          className={`flex flex-col items-center justify-center rounded-xl border ${
             isActive 
               ? "border-slate-400 bg-slate-100" 
-              : "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300"
+              : "border-slate-200 bg-white hover:bg-slate-50"
           }`}
-          style={{ 
-            width: baseSize, 
-            height: baseSize,
-          }}
+          style={{ width: baseSize, height: baseSize }}
         >
-          <Icon 
-            size={isMobile ? 18 : 20} 
-            className="text-slate-600"
-          />
+          <Icon size={isMobile ? 18 : 20} />
         </motion.div>
 
-        {/* Active indicator dot */}
         {isActive && (
           <motion.div
-            className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-500"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            layoutId={`active-${appKey}`}
+            className="absolute -bottom-1 left-1/2 w-1.5 h-1.5 rounded-full bg-slate-500"
           />
         )}
+
       </motion.button>
-      
-      {/* Mobile label */}
+
       {isMobile && (
-        <div className="text-[9px] text-center text-slate-500 mt-0.5 truncate" style={{ width: baseSize }}>
-          {app.title.split(' ')[0]}
+        <div className="text-[9px] text-center mt-0.5">
+          {app.title.split(" ")[0]}
         </div>
       )}
+
     </motion.div>
   );
 }

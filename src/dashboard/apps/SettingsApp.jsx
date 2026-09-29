@@ -1,6 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaCog, FaBell, FaPalette, FaUser, FaShieldAlt, FaInfoCircle, FaChevronLeft } from "react-icons/fa";
+
+// ---- ONLY ADDED SECTION ----
+const loadSettings = async () => {
+  const res = await fetch("http://localhost/backend/api/settings.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      clerk_id: localStorage.getItem("clerk_id")
+    })
+  });
+  return res.json();
+};
+
+const saveSettings = async (settings) => {
+  await fetch("http://localhost/backend/api/settings.php", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      clerk_id: localStorage.getItem("clerk_id"),
+      settings
+    })
+  });
+};
+// ---- END ADDED SECTION ----
 
 const SETTINGS_SECTIONS = [
   { id: "profile", title: "Profile", icon: FaUser, description: "Manage your profile settings" },
@@ -18,10 +42,24 @@ export default function SettingsApp() {
     emailAlerts: true,
     soundEffects: true,
   });
+
   const isMobile = window.innerWidth < 640;
 
+  // ---- ONLY ADDED ----
+  useEffect(() => {
+    loadSettings().then(data => {
+      if (data) setSettings(data);
+    });
+  }, []);
+  // --------------------
+
   const toggleSetting = (key) => {
-    setSettings(prev => ({ ...prev, [key]: !prev[key] }));
+    const newSettings = { ...settings, [key]: !settings[key] };
+    setSettings(newSettings);
+
+    // ---- ONLY ADDED ----
+    saveSettings(newSettings);
+    // --------------------
   };
 
   // Mobile: show section list or section content
@@ -83,7 +121,6 @@ export default function SettingsApp() {
   // Desktop: sidebar layout
   return (
     <div className="flex h-full">
-      {/* Sidebar */}
       <div className="w-48 border-r border-slate-200 p-2">
         {SETTINGS_SECTIONS.map((section) => {
           const Icon = section.icon;
@@ -106,7 +143,6 @@ export default function SettingsApp() {
         })}
       </div>
 
-      {/* Content */}
       <div className="flex-1 p-4 overflow-auto">
         <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
           <FaCog className="text-slate-500" />
@@ -117,6 +153,8 @@ export default function SettingsApp() {
     </div>
   );
 }
+
+// ---- BELOW PART UNCHANGED ----
 
 function renderSectionContent(sectionId, settings, toggleSetting) {
   switch (sectionId) {
@@ -137,6 +175,7 @@ function renderSectionContent(sectionId, settings, toggleSetting) {
           </button>
         </div>
       );
+
     case "notifications":
       return (
         <div className="space-y-3">
@@ -160,6 +199,7 @@ function renderSectionContent(sectionId, settings, toggleSetting) {
           />
         </div>
       );
+
     case "appearance":
       return (
         <div className="space-y-3">
@@ -183,6 +223,7 @@ function renderSectionContent(sectionId, settings, toggleSetting) {
           </div>
         </div>
       );
+
     case "privacy":
       return (
         <div className="space-y-3">
@@ -197,6 +238,7 @@ function renderSectionContent(sectionId, settings, toggleSetting) {
           </div>
         </div>
       );
+
     case "about":
       return (
         <div className="space-y-3">
@@ -209,6 +251,7 @@ function renderSectionContent(sectionId, settings, toggleSetting) {
           </div>
         </div>
       );
+
     default:
       return null;
   }

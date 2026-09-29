@@ -1,7 +1,28 @@
 import { useUser } from "@clerk/clerk-react";
+import { useEffect } from "react";
+
+// ---- ONLY ADDED SECTION ----
+const syncProfile = async (user) => {
+  await fetch("http://localhost/backend/api/profile.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      clerk_id: user.id,
+      name: user.fullName,
+      email: user.primaryEmailAddress?.emailAddress,
+    }),
+  });
+};
+// ---- END ADDED SECTION ----
 
 export default function Profile() {
   const { user } = useUser();
+
+  // ---- ONLY ADDED LINE ----
+  useEffect(() => {
+    if (user) syncProfile(user);
+  }, [user]);
+  // ------------------------
 
   return (
     <div className="pt-28 px-6 min-h-screen bg-slate-50">

@@ -4,39 +4,34 @@ import CoursesApp from "./CoursesApp";
 import MyCoursesApp from "./MyCoursesApp";
 import BadgesApp from "./BadgesApp";
 import CertificatesApp from "./CertificatesApp";
-import NotesApp from "./NotesApp";
-import WordApp from "./WordApp";
 import SettingsApp from "./SettingsApp";
-import AttendanceApp from "./AttendanceApp";
-import DefaultApp from "./DefaultApp";
+
+import AdminApp from "../../apps/admin/AdminApp";
+
+function ComingSoon({ type }) {
+  return (
+    <div className="p-10 text-center">
+      <h3 className="text-lg font-bold text-slate-900 capitalize">{type || "App"}</h3>
+      <p className="text-sm text-slate-500 mt-2">This section is being rebuilt for the new Supabase + R2 release.</p>
+    </div>
+  );
+}
 
 export function renderApp(type, openWindow) {
   switch (type) {
     case "courses":
       return <CoursesApp />;
-
     case "mycourses":
       return <MyCoursesApp />;
-
     case "badges":
       return <BadgesApp />;
-
     case "certificates":
       return <CertificatesApp />;
-
-    case "notes":
-      return <NotesApp />;
-
-    case "word":
-      return <WordApp />;
-
     case "settings":
       return <SettingsApp />;
-
-    case "attendance":
-      return <AttendanceApp />;
-
+    case "admin":
+      return <AdminApp />;
     default:
-      return <DefaultApp type={type} />;
+      return <ComingSoon type={type} />;
   }
 }

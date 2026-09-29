@@ -1,24 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { useUser } from "@clerk/clerk-react";
 
 import { useWindowManager } from "./hooks/useWindowManager";
 import { TOPBAR_HEIGHT, TOPBAR_HEIGHT_MOBILE } from "./constants";
 
-import AnimatedBackground from "./components/AnimatedBackground";
 import Window from "./components/Window";
 import Dock from "./components/Dock";
-import ContextMenu from "./components/ContextMenu";
-import MinimizedStack from "./components/MinimizedStack";
 
 import { renderApp } from "./apps";
 
-// ✅ Import your landing Navbar
 import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
   const wm = useWindowManager();
-  const [contextMenu, setContextMenu] = useState(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const { user } = useUser();
+
+  const [role, setRole] = useState("student");
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
+
+  useEffect(() => {
+    if (user) localStorage.setItem("clerk_id", user.id);
+  }, [user]);
+
+  useEffect(() => {
+    const checkRole = async () => {
+      if (!user?.id) return;
+      try {
+        const res = await fetch(
+          `http://localhost/linux/backend/api/admin/check_role.php?clerk_id=${user.id}`
+        );
+        const data = await res.json();
+        if (data.success) {
+          setRole(data.role);
+          localStorage.setItem("user_role", data.role);
+        }
+      } catch (err) {
+        console.error("Role check failed", err);
+      }
+    };
+    checkRole();
+  }, [user]);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768);
@@ -30,10 +54,7 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* ✅ Top Navbar */}
       <Navbar />
-
-      {/* Dashboard Area */}
       <div
         className="fixed inset-0 overflow-hidden"
         style={{
@@ -42,17 +63,7 @@ export default function Dashboard() {
           backgroundImage: isMobile ? "none" : "radial-gradient(#e5e7eb 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }}
-        onContextMenu={(e) => {
-          if (isMobile) return;
-          e.preventDefault();
-          setContextMenu({ x: e.clientX, y: e.clientY });
-        }}
-        onClick={() => setContextMenu(null)}
       >
-        {/* Background - hide on mobile for performance */}
-        {!isMobile && <AnimatedBackground />}
-
-        {/* Windows */}
         <AnimatePresence mode="wait">
           {wm.visible.map((w) => (
             <Window
@@ -60,10 +71,10 @@ export default function Dashboard() {
               {...w}
               isMobile={isMobile}
               isFullscreen={isMobile ? true : w.fullscreen}
-              onFocus={wm.focusWindow}
-              onClose={wm.closeWindow}
-              onMinimize={wm.minimizeWindow}
-              onToggleFullscreen={wm.toggleFullscreen}
+              onFocus={() => wm.focusWindow(w.id)}
+              onClose={() => wm.closeWindow(w.id)}
+              onMinimize={() => wm.minimizeWindow(w.id)}
+              onToggleFullscreen={() => wm.toggleFullscreen(w.id)}
               onDrag={wm.onDrag}
               onDragEnd={wm.onDragEnd}
               onResize={wm.onResize}
@@ -74,29 +85,16 @@ export default function Dashboard() {
           ))}
         </AnimatePresence>
 
-        {/* Minimized Stack (desktop only) */}
-        {!isMobile && (
-          <MinimizedStack minimized={wm.minimized} restoreWindow={wm.restoreWindow} />
-        )}
-
-        {/* Dock */}
         <Dock
           windows={wm.windows}
-          onOpenApp={wm.openWindow}
+          onOpenApp={(type) => {
+            const existing = wm.windows.find((x) => x.type === type);
+            if (existing) wm.focusWindow(existing.id);
+            else wm.openWindow(type);
+          }}
           isMobile={isMobile}
         />
 
-        {/* Context Menu (desktop only) */}
-        {!isMobile && (
-          <ContextMenu
-            contextMenu={contextMenu}
-            setContextMenu={setContextMenu}
-            openWindow={wm.openWindow}
-            setWindows={wm.setWindows}
-          />
-        )}
-
-        {/* Empty Desktop Hint */}
         {wm.windows.length === 0 && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="text-center text-slate-500 px-6">
@@ -104,10 +102,7 @@ export default function Dashboard() {
                 Welcome to The Linux School
               </div>
               <div className={`${isMobile ? "text-xs" : "text-sm"}`}>
-                {isMobile 
-                  ? "Tap icons below to open apps" 
-                  : "Click icons in the dock or right-click to open applications"
-                }
+                {isMobile ? "Tap icons below to open apps" : "Click icons in the dock to open your courses"}
               </div>
             </div>
           </div>

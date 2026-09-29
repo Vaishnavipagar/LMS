@@ -19,9 +19,9 @@ export default function Footer() {
   const quickLinks = [
     { name: "Home", path: "/#home" },
     { name: "Courses", path: "/#courses" },
-    { name: "Blogs", path: "/blogs" },
+    { name: "Paths", path: "/#paths" },
     { name: "Reviews", path: "/#reviews" },
-    { name: "Contact", path: "/#footer" }, // Scrolls to this footer
+    { name: "Contact", path: "/#footer" },
   ];
 
   const resourceLinks = [
@@ -97,8 +97,8 @@ export default function Footer() {
             </div>
 
             <p className="mt-4 text-[13.8px] leading-[1.9] text-slate-400">
-              Learn Linux, DevOps, and Full Stack development with industry-ready
-              courses and hands-on projects.
+              Learn AI, Python, web development, backend, data science and
+              machine learning with industry-ready courses and hands-on projects.
             </p>
 
             <div className="flex gap-4 mt-6">
