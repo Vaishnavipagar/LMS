@@ -1,76 +1,59 @@
-import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import CourseSection, { CATALOG } from "../components/CourseSection";
-
-const FILTERS = ["All", "AI", "Web Dev", "Backend", "Python", "Data Science", "ML"];
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { TABS, coursesByTab } from "../data/courses";
 
 export default function Courses() {
-  const [active, setActive] = useState("All");
-  const [query, setQuery] = useState("");
-
-  const filtered = useMemo(() => {
-    return CATALOG.filter((c) => {
-      const okCat = active === "All" || c.category === active;
-      const okQ = !query || `${c.title} ${c.desc}`.toLowerCase().includes(query.toLowerCase());
-      return okCat && okQ;
-    });
-  }, [active, query]);
+  const [tab, setTab] = useState("All");
+  const navigate = useNavigate();
+  const list = coursesByTab(tab);
 
   return (
-    <div className="pt-[110px] bg-white min-h-screen" style={{ backgroundImage: "radial-gradient(#cbd5e1 1px, transparent 1px)", backgroundSize: "40px 40px" }}>
-      <div className="max-w-7xl mx-auto px-6 pb-4">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">All <span className="text-gray-500">Courses</span></h1>
-        <p className="text-slate-500 mt-3 max-w-2xl">Filter by track. Videos stream from Cloudflare R2 (HLS) once backend is connected.</p>
-
-        <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search Python, React, ML..."
-            className="flex-1 px-5 py-3.5 rounded-2xl border border-slate-200 bg-white outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 font-medium"
-          />
+    <div>
+      <div className="bg-[#0a4a3c] pt-28 pb-10">
+        <div className="w-full max-w-6xl mx-auto px-5 sm:px-8">
+          <h1 className="text-white text-2xl sm:text-3xl font-extrabold tracking-tight">All courses</h1>
+          <p className="text-white/60 text-[13px] mt-2">Development, business, design and marketing tracks.</p>
+          <div className="flex flex-wrap gap-2 mt-6">
+            {TABS.map((t) => (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                className={`px-4 py-2 rounded-full text-[12px] font-bold border transition ${
+                  tab === t ? "bg-[#f2d90d] text-black border-[#f2d90d]" : "bg-transparent text-white/80 border-white/25 hover:border-white"
+                }`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
         </div>
-
-        <div className="flex flex-wrap gap-2.5 mt-5">
-          {FILTERS.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`px-5 py-2.5 rounded-full text-sm font-bold border transition-all ${
-                active === f ? "bg-slate-900 text-white border-slate-900 shadow-lg" : "bg-white text-slate-600 border-slate-200 hover:border-slate-400"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-
-        <p className="text-sm font-semibold text-slate-400 mt-6">{filtered.length} course{filtered.length !== 1 ? "s" : ""} found</p>
       </div>
 
-      {active === "All" && !query ? (
-        <CourseSection preview={false} />
-      ) : (
-        <div className="max-w-7xl mx-auto px-6 pb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-          {filtered.map((c, i) => (
-            <motion.article key={c.id} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: i * 0.05 }} className="bg-white border border-slate-200 rounded-[24px] overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all">
-              <div className="h-[190px] overflow-hidden relative">
-                <img src={c.image} alt={c.title} loading="lazy" className="w-full h-full object-cover" />
-                <span className="absolute top-3 left-3 bg-white/90 text-slate-900 text-[11px] font-extrabold px-3 py-1 rounded-full uppercase">{c.category}</span>
+      <div className="bg-[#f4f6f4]">
+        <div className="w-full max-w-6xl mx-auto px-5 sm:px-8 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {list.map((c) => (
+            <article key={c.id} className="bg-white rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-xl transition">
+              <div className="h-44 overflow-hidden">
+                <img src={c.img} alt={c.title} loading="lazy" className="block w-full h-full object-cover" />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{c.title}</h3>
-                <p className="text-sm text-slate-500 mb-4 line-clamp-2">{c.desc}</p>
-                <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-lg">{c.price}</span>
-                  <span className="text-xs font-semibold text-slate-500">{c.lessons} lessons · {c.hours}</span>
+              <div className="p-5 relative">
+                <div className="burst absolute -top-7 right-4 w-14 h-14 bg-[#c9f29b] grid place-items-center rotate-12">
+                  <span className="text-[11px] font-extrabold">{c.price}</span>
                 </div>
+                <p className="text-[11px] text-gray-500 font-semibold">{c.cat} • {c.instructor}</p>
+                <h3 className="font-bold text-[14px] leading-snug mt-1.5 min-h-[40px]">{c.title}</h3>
+                <div className="flex items-center gap-4 mt-3 pt-3 border-t border-gray-100 text-[11px] text-gray-500 font-medium">
+                  <span>{c.lessons} Lessons</span>
+                  <span>{c.students} students</span>
+                </div>
+                <button onClick={() => navigate(`/course/${c.id}`)} className="mt-4 w-full rounded-lg bg-[#0a4a3c] text-white text-[13px] font-bold py-2.5 hover:bg-[#0d5c4a] transition">
+                  View course
+                </button>
               </div>
-            </motion.article>
+            </article>
           ))}
-          {filtered.length === 0 && <p className="text-slate-500 font-medium py-10">No courses match. Try another keyword.</p>}
         </div>
-      )}
+      </div>
     </div>
   );
 }

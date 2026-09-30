@@ -1,122 +1,98 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { SignedIn, SignedOut, RedirectToSignIn, useUser } from "@clerk/clerk-react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-// Shell
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+// ── Layout (edit: src/components/layout/*.jsx + src/data/navigation.js, footer.js) ──
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 
-// Home sections — one file per section
-import HeroSection from "./components/HeroSection";
-import TrustBar from "./components/TrustBar";
-import CourseSection from "./components/CourseSection";
-import LearningPaths from "./components/LearningPaths";
-import WhyLinuxSection from "./components/WhyLinuxSection";
-import StatsSection from "./components/StatsSection";
-import TopFacultiesSection from "./components/TopFacultiesSection";
-import ReviewSection from "./components/ReviewSection";
-import CTASection from "./components/CTASection";
+// ── Home sections, one dedicated file each ──
+// Hero → components/home/Hero.jsx + data/hero.js
+// Brands → components/home/LogoStrip.jsx + data/brands.js
+// Journey → components/home/Journey.jsx + data/journey.js
+// Courses → components/home/PopularCourses.jsx + data/courses.*.js
+// Premium → components/home/PremiumExperience.jsx + data/premium.js
+// Watermark → components/home/Watermark.jsx (static)
+// Testimonials → components/home/Testimonials.jsx + data/testimonials.js
+// Articles → components/home/Articles.jsx + data/articles.js
+// Admission → components/home/Admission.jsx + data/admission.js
+import Hero from "./components/home/Hero";
+import LogoStrip from "./components/home/LogoStrip";
+import Journey from "./components/home/Journey";
+import PopularCourses from "./components/home/PopularCourses";
+import PremiumExperience from "./components/home/PremiumExperience";
+import Watermark from "./components/home/Watermark";
+import Testimonials from "./components/home/Testimonials";
+import Articles from "./components/home/Articles";
+import Admission from "./components/home/Admission";
 
-// Pages
+// ── Pages (edit: src/pages/*.jsx + src/data/auth.js) ──
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import Courses from "./pages/Courses";
-import Profile from "./pages/Profile";
-import CoursePlayer from "./pages/course/CoursePlayer";
+import CourseDetail from "./pages/CourseDetail";
 
-// Dashboards
-import DashboardOS from "./dashboard/Dashboard";
-import AdminApp from "./apps/admin/AdminApp";
-import { checkAdmin } from "./services/admin/authService";
+import { scrollToId } from "./lib/scroll";
 
-function ScrollToHash() {
+function HashScroll() {
   const { pathname, hash } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (pathname.startsWith("/dashboard")) return;
-    if (!hash) window.scrollTo(0, 0);
+    if (hash) {
+      const t = setTimeout(() => scrollToId(hash.slice(1)), 80);
+      return () => clearTimeout(t);
+    }
+    if (pathname !== "/" || !window.location.hash) window.scrollTo(0, 0);
   }, [pathname, hash]);
 
   useEffect(() => {
-    if (!hash) return;
-    const id = hash.replace("#", "");
-    const t = setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }, 80);
-    return () => clearTimeout(t);
-  }, [hash, pathname]);
+    if (pathname === "/" && window.location.hash) scrollToId(window.location.hash.slice(1));
+  }, [pathname]);
 
   return null;
 }
 
 function HomePage() {
   return (
-    <>
-      <div id="home"><HeroSection /></div>
-      <TrustBar />
-      <div id="courses"><CourseSection preview /></div>
-      <LearningPaths />
-      <div id="why"><WhyLinuxSection /></div>
-      <div id="stats"><StatsSection /></div>
-      <TopFacultiesSection />
-      <ReviewSection />
-      <CTASection />
-    </>
-  );
-}
-
-function LandingLayout({ children }) {
-  return (
-    <>
-      <Navbar />
-      <main className="overflow-x-hidden">{children}</main>
+    <main className="w-full bg-white">
+      <div className="relative">
+        <Navbar />
+        <Hero />
+      </div>
+      <LogoStrip />
+      <Journey />
+      <PopularCourses />
+      <PremiumExperience />
+      <Watermark />
+      <Testimonials />
+      <Articles />
+      <Admission />
       <Footer />
-    </>
+    </main>
   );
 }
 
-function AdminRoute() {
-  const { user, isLoaded } = useUser();
-  const [allowed, setAllowed] = useState(false);
-  const [checking, setChecking] = useState(true);
-
-  useEffect(() => {
-    if (!isLoaded) return;
-    if (!user?.id) return;
-    checkAdmin(user.id)
-      .then((r) => setAllowed(r.isAdmin === true))
-      .catch(() => setAllowed(false))
-      .finally(() => setChecking(false));
-  }, [isLoaded, user]);
-
-  if (!isLoaded || checking) return <div className="p-10 pt-28">Checking admin access...</div>;
-  if (!allowed) return <div className="p-10 pt-28 text-red-500 font-semibold">You are not authorized as Admin</div>;
-  return <AdminApp />;
+function SubPage({ children, darkNav = false }) {
+  return (
+    <main className="w-full bg-white min-h-screen">
+      <div className={`relative ${darkNav ? "bg-[#0a4a3c]" : ""}`}>
+        <Navbar />
+        {children}
+      </div>
+      <Footer />
+    </main>
+  );
 }
 
 export default function App() {
   return (
     <>
-      <ScrollToHash />
+      <HashScroll />
       <Routes>
-        <Route path="/" element={<LandingLayout><HomePage /></LandingLayout>} />
-        <Route path="/login/*" element={<LandingLayout><Login /></LandingLayout>} />
-        <Route path="/signup/*" element={<LandingLayout><Signup /></LandingLayout>} />
-        <Route path="/courses" element={<LandingLayout><Courses /></LandingLayout>} />
-        <Route
-          path="/dashboard/*"
-          element={<><SignedIn><DashboardOS /></SignedIn><SignedOut><RedirectToSignIn /></SignedOut></>}
-        />
-        <Route
-          path="/admin/*"
-          element={<><SignedIn><AdminRoute /></SignedIn><SignedOut><RedirectToSignIn /></SignedOut></>}
-        />
-        <Route
-          path="/profile"
-          element={<><SignedIn><LandingLayout><Profile /></LandingLayout></SignedIn><SignedOut><RedirectToSignIn /></SignedOut></>}
-        />
-        <Route path="/course/:courseId" element={<CoursePlayer />} />
-        <Route path="*" element={<LandingLayout><HomePage /></LandingLayout>} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/courses" element={<SubPage darkNav><Courses /></SubPage>} />
+        <Route path="/course/:courseId" element={<SubPage darkNav><CourseDetail /></SubPage>} />
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </>
   );

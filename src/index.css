@@ -3,66 +3,46 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: auto !important;
+  scroll-behavior: smooth;
 }
 
 html, body {
   width: 100%;
-  height: 100%;          /* 🔥 IMPORTANT: use height, not min-height */
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  overflow-anchor: none;
-
-  /* ❌ Kill BIG outer scrollbar */
-  overflow-y: hidden;
+  background: #ffffff;
+  color: #101c19;
+  font-family: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 #root {
   width: 100%;
-  height: 100%;
-
-  /* ✅ THIS is the ONLY scrollbar (small one) */
-  overflow-y: auto;
-  overflow-x: hidden;
+  min-height: 100%;
 }
 
-body {
-  background:
-    radial-gradient(circle at 20% 20%, rgba(242, 242, 247, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 60%, rgba(240, 240, 243, 0.06), transparent 45%),
-    linear-gradient(to bottom, #f8fafc, #ffffff);
-  color: #0f172a;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
+/* faint outline watermark text like the reference */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(16, 28, 25, 0.14);
+  color: transparent;
 }
 
-/* Mobile-first responsive typography */
-@media (max-width: 640px) {
-  html {
-    font-size: 14px;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    word-break: break-word;
-    overflow-wrap: break-word;
-  }
+/* starburst price badge */
+.burst {
+  clip-path: polygon(50% 0%, 61% 12%, 75% 7%, 79% 21%, 93% 21%, 90% 35%, 100% 43%, 92% 55%, 98% 68%, 85% 73%, 84% 88%, 70% 86%, 63% 100%, 52% 90%, 39% 98%, 34% 84%, 19% 86%, 19% 71%, 5% 67%, 10% 54%, 0% 45%, 10% 36%, 7% 22%, 21% 21%, 25% 7%, 38% 12%);
 }
 
-/* Prevent horizontal scroll on mobile */
-section, div, main {
-  max-width: 100vw;
+/* concentric arc lines in hero (right side) */
+.hero-rings {
+  background: repeating-radial-gradient(circle at 78% 45%, transparent 0 14px, rgba(255, 255, 255, 0.13) 14px 15px);
 }
 
-/* Better touch targets for mobile */
-@media (max-width: 768px) {
-  button, a, [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
-  }
+::selection {
+  background: #0a4a3c;
+  color: #fff;
 }
 
-/* Hide scrollbar utility for dock */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -71,7 +51,6 @@ section, div, main {
   display: none;
 }
 
-/* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -79,74 +58,3 @@ section, div, main {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-
-
-
-
-
-
-
-
-
-
-/* Add to your global CSS file (e.g., index.css) */
-
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Selection style */
-::selection {
-  background: rgba(6, 182, 212, 0.3);
-  color: white;
-}
-
-
