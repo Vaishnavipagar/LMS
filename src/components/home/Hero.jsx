@@ -42,8 +42,6 @@ export default function Hero() {
               className="block w-[300px] sm:w-[380px] h-[380px] sm:h-[460px] object-cover rounded-[28px]"
               loading="eager"
             />
-            <div className="absolute -left-5 top-10 w-11 h-11 rounded-2xl bg-[#ff8a3d] grid place-items-center text-white text-lg shadow-lg rotate-[-8deg]">✎</div>
-            <div className="absolute -right-4 top-8 w-11 h-11 rounded-2xl bg-[#7ee2a8] grid place-items-center text-[#0a4a3c] font-black shadow-lg rotate-[8deg]">✓</div>
             <div className="absolute left-10 -bottom-5 w-12 h-12 rounded-2xl bg-[#7ee2a8] grid place-items-center text-[#0a4a3c] text-xl shadow-lg">◐</div>
             <div className="absolute right-12 bottom-20 w-10 h-10 rounded-full border border-white/40 bg-white/10" />
           </div>

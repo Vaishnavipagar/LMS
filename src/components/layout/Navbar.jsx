@@ -1,60 +1,71 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { NAV_LINKS } from "../../data/navigation";
 import { handleAnchorClick } from "../../lib/scroll";
+
+// Labels match the reference design; each points at the closest existing
+// section/route so every link keeps working with current routes.
+const NAV_ITEMS = [
+  { label: "Home", to: "/#home" },
+  { label: "Courses", to: "/#courses" },
+  { label: "Paths", to: "/courses" },
+  { label: "Mentors", to: "/#instructors" },
+  { label: "Reviews", to: "/#testimonial" },
+  { label: "Why Us", to: "/#instructors" },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const logged = typeof window !== "undefined" && !!localStorage.getItem("learnaxis_user");
 
   const go = (e, to) => {
-    if (handleAnchorClick(e, to, navigate)) setOpen(false);
+    handleAnchorClick(e, to, navigate);
+    setOpen(false);
   };
 
   return (
     <header className="absolute top-0 left-0 w-full z-50">
-      <nav className="w-full max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-8 pt-6">
-        <button onClick={() => navigate("/")} className="text-white font-extrabold text-lg tracking-tight">
-          LearnAxis
-        </button>
+      <div className="flex justify-center px-4 pt-4">
+        <nav className="flex items-center justify-between w-full max-w-6xl bg-white rounded-full border border-slate-200/70 pl-7 pr-2.5 py-2.5 shadow-[0_10px_40px_rgba(0,0,0,0.18)]">
+          <button onClick={() => navigate("/")} className="text-slate-900 font-extrabold text-[17px] tracking-tight shrink-0">
+            LearnAxis
+          </button>
 
-        <ul className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((l) => (
-            <li key={l.label}>
-              <Link to={l.to} onClick={(e) => go(e, l.to)} className="text-white/85 hover:text-white text-[13px] font-medium transition">
-                {l.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+          <ul className="hidden md:flex items-center gap-6 lg:gap-8">
+            {NAV_ITEMS.map((l) => (
+              <li key={l.label}>
+                <Link
+                  to={l.to}
+                  onClick={(e) => go(e, l.to)}
+                  className="text-slate-600 hover:text-slate-950 font-semibold text-sm transition whitespace-nowrap"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        <div className="hidden md:block">
-          {logged ? (
+          <div className="hidden md:flex items-center gap-4">
+            <span className="w-px h-8 bg-slate-200" aria-hidden />
             <button
-              onClick={() => navigate("/courses")}
-              className="text-[13px] font-semibold text-white border border-white/40 rounded-full px-5 py-2 hover:bg-white hover:text-[#0a4a3c] transition"
+              onClick={() => navigate("/login")}
+              className="bg-slate-950 text-white font-bold text-sm px-7 py-3 rounded-full hover:bg-slate-800 transition"
             >
-              Dashboard
+              Login
             </button>
-          ) : (
-            <button onClick={() => navigate("/login")} className="text-[13px] font-semibold text-white/90 hover:text-white transition">
-              Contact us
-            </button>
-          )}
-        </div>
+          </div>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-white text-2xl leading-none px-2" aria-label="menu">
-          {open ? "×" : "☰"}
-        </button>
-      </nav>
+          <button onClick={() => setOpen(!open)} className="md:hidden text-slate-900 text-2xl leading-none px-3 py-1" aria-label="menu">
+            {open ? "×" : "☰"}
+          </button>
+        </nav>
+      </div>
 
       {open && (
-        <div className="md:hidden mx-4 mt-3 rounded-2xl bg-[#08382d] border border-white/15 p-5 shadow-2xl">
+        <div className="md:hidden mx-4 mt-2 rounded-3xl bg-white p-6 shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
           <ul className="flex flex-col gap-4">
-            {NAV_LINKS.map((l) => (
+            {NAV_ITEMS.map((l) => (
               <li key={l.label}>
-                <Link to={l.to} onClick={(e) => go(e, l.to)} className="text-white font-semibold">
+                <Link to={l.to} onClick={(e) => go(e, l.to)} className="text-slate-700 font-semibold text-[15px] hover:text-slate-950">
                   {l.label}
                 </Link>
               </li>
@@ -62,9 +73,9 @@ export default function Navbar() {
             <li>
               <button
                 onClick={() => { setOpen(false); navigate("/login"); }}
-                className="w-full mt-2 rounded-full bg-[#f2d90d] text-black font-bold py-3 text-sm"
+                className="w-full mt-2 rounded-full bg-slate-950 text-white font-bold py-3 text-sm hover:bg-slate-800 transition"
               >
-                Contact us / Login
+                Login
               </button>
             </li>
           </ul>

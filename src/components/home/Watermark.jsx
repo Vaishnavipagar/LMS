@@ -6,9 +6,6 @@ export default function Watermark() {
           amazing online courses
         </p>
       </div>
-      <p className="text-center text-[13px] font-semibold text-gray-500 -mt-3 sm:-mt-6">
-        Online learning wherever and whenever.
-      </p>
     </section>
   );
 }

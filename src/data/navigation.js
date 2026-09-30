@@ -16,3 +16,7 @@ export const FOOTER_BOTTOM_LINKS = [
   { label: "Testimonial", to: "/#testimonial" },
   { label: "Blog", to: "/#blog" },
 ];
+
+// Navbar-only link. Points to the existing contact destination used
+// everywhere else in the project (Navbar + Footer "Contact us" → /login).
+export const CONTACT_LINK = { label: "Contact Us", to: "/login" };

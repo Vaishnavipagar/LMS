@@ -36,10 +36,7 @@ export default function Courses() {
               <div className="h-44 overflow-hidden">
                 <img src={c.img} alt={c.title} loading="lazy" className="block w-full h-full object-cover" />
               </div>
-              <div className="p-5 relative">
-                <div className="burst absolute -top-7 right-4 w-14 h-14 bg-[#c9f29b] grid place-items-center rotate-12">
-                  <span className="text-[11px] font-extrabold">{c.price}</span>
-                </div>
+              <div className="p-5">
                 <p className="text-[11px] text-gray-500 font-semibold">{c.cat} • {c.instructor}</p>
                 <h3 className="font-bold text-[14px] leading-snug mt-1.5 min-h-[40px]">{c.title}</h3>
                 <div className="flex items-center gap-4 mt-3 pt-3 border-t border-gray-100 text-[11px] text-gray-500 font-medium">

@@ -15,4 +15,27 @@ export const TESTIMONIALS = {
     "Thank you so much for your help. It's exactly what I've been looking for. You won't regret it. It really saves me time and effort. Our business has been thriving.",
   quoteName: "Emilly Cart",
   quoteMeta: "5 Reviews",
+  reviews: [
+    {
+      quote:
+        "Thank you so much for your help. It's exactly what I've been looking for. You won't regret it. It really saves me time and effort. Our business has been thriving.",
+      name: "Emilly Cart",
+      stars: 5,
+      meta: "5 Reviews",
+    },
+    {
+      quote:
+        "The courses are clear, practical and perfectly paced. I finished the full track in two months and cracked my first frontend interview right after.",
+      name: "Rahul Verma",
+      stars: 5,
+      meta: "12 Reviews",
+    },
+    {
+      quote:
+        "Support is genuinely fast and the live classes feel personal. My team uses the platform every week and our skills have visibly improved.",
+      name: "Sarah Mitchell",
+      stars: 5,
+      meta: "8 Reviews",
+    },
+  ],
 };

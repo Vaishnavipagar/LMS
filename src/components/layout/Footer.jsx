@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FOOTER as F } from "../../data/footer";
-import { FOOTER_BOTTOM_LINKS } from "../../data/navigation";
-import { handleAnchorClick } from "../../lib/scroll";
+import { CONTACT_LINK } from "../../data/navigation";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
-  const navigate = useNavigate();
 
   const subscribe = (e) => {
     e.preventDefault();
@@ -16,8 +14,6 @@ export default function Footer() {
     setEmail("");
     setTimeout(() => setDone(false), 3000);
   };
-
-  const go = (e, to) => handleAnchorClick(e, to, navigate);
 
   return (
     <footer className="bg-[#0a0f0d] text-white">
@@ -52,30 +48,28 @@ export default function Footer() {
           <div>
             <p className="text-[13px] font-bold">{F.supportTitle}</p>
             <ul className="mt-4 space-y-2.5 text-[12px] text-white/55">
-              {F.support.map((c) => (
-                <li key={c}><Link to="/login" className="hover:text-white cursor-pointer">{c}</Link></li>
-              ))}
+              <li>
+                <Link to={CONTACT_LINK.to} className="hover:text-white">
+                  {CONTACT_LINK.label}
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="text-[13px] font-bold">{F.helpTitle}</p>
             <ul className="mt-4 space-y-2.5 text-[12px] text-white/55">
-              {F.help.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
+              <li>
+                <a href="tel:+12345678910" className="hover:text-white">+12345678910</a>
+              </li>
+              <li>
+                <a href="mailto:help@domain.com" className="hover:text-white">help@domain.com</a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-10 pt-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[12px] text-white/60 font-medium">
-            {FOOTER_BOTTOM_LINKS.map((l) => (
-              <Link key={l.label} to={l.to} onClick={(e) => go(e, l.to)} className="hover:text-white">
-                {l.label}
-              </Link>
-            ))}
-          </div>
+        <div className="border-t border-white/10 mt-10 pt-5 text-center">
           <p className="text-[11px] text-white/35">© {new Date().getFullYear()} LearnAxis. All rights reserved.</p>
         </div>
       </div>
