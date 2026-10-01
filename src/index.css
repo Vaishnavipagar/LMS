@@ -12,7 +12,7 @@ html, body {
   padding: 0;
   overflow-x: hidden;
   background: #ffffff;
-  color: #101c19;
+  color: #191817;
   font-family: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -22,90 +22,20 @@ html, body {
   min-height: 100%;
 }
 
-/* faint outline watermark text like the reference */
-.text-outline {
-  -webkit-text-stroke: 1px rgba(16, 28, 25, 0.14);
-  color: transparent;
+/* gentle float for hero cards */
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
-
-/* starburst price badge */
-.burst {
-  clip-path: polygon(50% 0%, 61% 12%, 75% 7%, 79% 21%, 93% 21%, 90% 35%, 100% 43%, 92% 55%, 98% 68%, 85% 73%, 84% 88%, 70% 86%, 63% 100%, 52% 90%, 39% 98%, 34% 84%, 19% 86%, 19% 71%, 5% 67%, 10% 54%, 0% 45%, 10% 36%, 7% 22%, 21% 21%, 25% 7%, 38% 12%);
+.float-soft {
+  animation: floatSoft 5s ease-in-out infinite;
 }
-
-/* concentric arc lines in hero (right side) */
-.hero-rings {
-  background: repeating-radial-gradient(circle at 78% 45%, transparent 0 14px, rgba(255, 255, 255, 0.13) 14px 15px);
-}
-
-/* subtle scroll reveal (Journey steps) */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal-in {
-  opacity: 1;
-  transform: none;
-}
-
-/* logo marquee: right-to-left seamless loop, pauses on hover */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
-.marquee:hover .animate-marquee {
-  animation-play-state: paused;
-}
-
-/* journey background blobs: slow, subtle drift */
-@keyframes journeyDrift1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(60px, 30px) scale(1.08); }
-}
-@keyframes journeyDrift2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-50px, -25px) scale(1.05); }
-}
-.journey-blob-1 {
-  animation: journeyDrift1 22s ease-in-out infinite;
-}
-.journey-blob-2 {
-  animation: journeyDrift2 26s ease-in-out infinite;
-}
-
-/* testimonial card text swap */
-@keyframes testimonialSwap {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
-}
-.testimonial-swap {
-  animation: testimonialSwap 0.5s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .animate-marquee {
-    animation: none;
-  }
-  .testimonial-swap {
-    animation: none;
-  }
-  .journey-blob-1,
-  .journey-blob-2 {
-    animation: none;
-  }
+.float-soft-late {
+  animation: floatSoft 6s ease-in-out 1s infinite;
 }
 
 ::selection {
-  background: #0a4a3c;
+  background: #F5820B;
   color: #fff;
 }
 
@@ -123,4 +53,11 @@ html, body {
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-soft,
+  .float-soft-late {
+    animation: none;
+  }
 }

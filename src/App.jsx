@@ -7,23 +7,17 @@ import Footer from "./components/layout/Footer";
 
 // ── Home sections, one dedicated file each ──
 // Hero → components/home/Hero.jsx + data/hero.js
-// Brands → components/home/LogoStrip.jsx + data/brands.js
-// Journey → components/home/Journey.jsx + data/journey.js
-// Courses → components/home/PopularCourses.jsx + data/courses.*.js
-// Premium → components/home/PremiumExperience.jsx + data/premium.js
-// Watermark → components/home/Watermark.jsx (static)
-// Testimonials → components/home/Testimonials.jsx + data/testimonials.js
-// Articles → components/home/Articles.jsx + data/articles.js
-// Admission → components/home/Admission.jsx + data/admission.js
+// Trusted-by → components/home/TrustedBy.jsx + data/organizations.js
+// Benefits → components/home/Benefits.jsx + data/benefits.js
+// Mission → components/home/Mission.jsx + data/mission.js
+// Metrics → components/home/Metrics.jsx + data/metrics.js
+// DeskBanner → components/home/DeskBanner.jsx (static)
 import Hero from "./components/home/Hero";
-import LogoStrip from "./components/home/LogoStrip";
-import Journey from "./components/home/Journey";
-import PopularCourses from "./components/home/PopularCourses";
-import PremiumExperience from "./components/home/PremiumExperience";
-import Watermark from "./components/home/Watermark";
-import Testimonials from "./components/home/Testimonials";
-import Articles from "./components/home/Articles";
-import Admission from "./components/home/Admission";
+import TrustedBy from "./components/home/TrustedBy";
+import Benefits from "./components/home/Benefits";
+import Mission from "./components/home/Mission";
+import Metrics from "./components/home/Metrics";
+import DeskBanner from "./components/home/DeskBanner";
 
 // ── Pages (edit: src/pages/*.jsx + src/data/auth.js) ──
 import Login from "./pages/Login";
@@ -54,30 +48,23 @@ function HashScroll() {
 function HomePage() {
   return (
     <main className="w-full bg-white">
-      <div className="relative">
-        <Navbar />
-        <Hero />
-      </div>
-      <LogoStrip />
-      <Journey />
-      <PopularCourses />
-      <PremiumExperience />
-      <Watermark />
-      <Testimonials />
-      <Articles />
-      <Admission />
+      <Navbar />
+      <Hero />
+      <TrustedBy />
+      <Benefits />
+      <Mission />
+      <Metrics />
+      <DeskBanner />
       <Footer />
     </main>
   );
 }
 
-function SubPage({ children, darkNav = false }) {
+function SubPage({ children }) {
   return (
     <main className="w-full bg-white min-h-screen">
-      <div className={`relative ${darkNav ? "bg-[#0a4a3c]" : ""}`}>
-        <Navbar />
-        {children}
-      </div>
+      <Navbar />
+      {children}
       <Footer />
     </main>
   );
@@ -90,8 +77,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/courses" element={<SubPage darkNav><Courses /></SubPage>} />
-        <Route path="/course/:courseId" element={<SubPage darkNav><CourseDetail /></SubPage>} />
+        <Route path="/courses" element={<SubPage><Courses /></SubPage>} />
+        <Route path="/course/:courseId" element={<SubPage><CourseDetail /></SubPage>} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </>

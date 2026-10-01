@@ -16,7 +16,7 @@ export default function CourseDetail() {
     return (
       <div className="min-h-screen bg-white pt-32 text-center px-6">
         <h1 className="text-xl font-extrabold">Course not found</h1>
-        <button onClick={() => navigate("/courses")} className="mt-5 rounded-lg bg-[#0a4a3c] text-white px-6 py-3 text-sm font-bold">
+        <button onClick={() => navigate("/courses")} className="mt-5 rounded-full bg-[#191817] text-white px-6 py-3 text-sm font-bold">
           Back to courses
         </button>
       </div>
@@ -33,7 +33,7 @@ export default function CourseDetail() {
   };
 
   return (
-    <div className="bg-[#f4f6f4] min-h-screen pt-24 pb-16">
+    <div className="bg-[#F6F0E6] min-h-screen pt-24 pb-16">
       <div className="w-full max-w-4xl mx-auto px-5">
         <img src={course.img} alt={course.title} className="block w-full h-72 object-cover rounded-2xl" />
         <p className="text-[12px] text-gray-500 font-semibold mt-5">{course.cat} • {course.instructor}</p>
@@ -42,14 +42,14 @@ export default function CourseDetail() {
           {course.students} students · {course.lessons} lessons · ★★★★★ ({course.reviews} Reviews)
         </p>
         {enrolled && (
-          <p className="mt-4 text-[13px] font-bold text-[#0a4a3c] bg-[#c9f29b]/40 border border-[#0a4a3c]/20 rounded-lg px-4 py-3">
+          <p className="mt-4 text-[13px] font-bold text-[#2f6b1f] bg-[#EDF4DC] border border-[#2f6b1f]/20 rounded-lg px-4 py-3">
             Enrolled. Start with lesson 1 — your progress saves in this browser demo.
           </p>
         )}
         <div className="mt-6 flex flex-wrap gap-3">
           <button
             onClick={enroll}
-            className={`rounded-lg px-7 py-3 text-sm font-extrabold transition ${enrolled ? "bg-[#0a4a3c] text-white" : "bg-[#f2d90d] text-black hover:brightness-110"}`}
+            className={`rounded-full px-7 py-3 text-sm font-extrabold transition ${enrolled ? "bg-[#191817] text-white" : "bg-[#F5820B] text-white hover:bg-[#E06F00]"}`}
           >
             {enrolled ? "Enrolled ✓" : `Enroll for ${course.price}`}
           </button>

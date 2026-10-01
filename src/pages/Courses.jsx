@@ -9,7 +9,7 @@ export default function Courses() {
 
   return (
     <div>
-      <div className="bg-[#0a4a3c] pt-28 pb-10">
+      <div className="bg-[#191817] pt-24 pb-10">
         <div className="w-full max-w-6xl mx-auto px-5 sm:px-8">
           <h1 className="text-white text-2xl sm:text-3xl font-extrabold tracking-tight">All courses</h1>
           <p className="text-white/60 text-[13px] mt-2">Development, business, design and marketing tracks.</p>
@@ -19,7 +19,7 @@ export default function Courses() {
                 key={t}
                 onClick={() => setTab(t)}
                 className={`px-4 py-2 rounded-full text-[12px] font-bold border transition ${
-                  tab === t ? "bg-[#f2d90d] text-black border-[#f2d90d]" : "bg-transparent text-white/80 border-white/25 hover:border-white"
+                  tab === t ? "bg-[#F5820B] text-white border-[#F5820B]" : "bg-transparent text-white/80 border-white/25 hover:border-white"
                 }`}
               >
                 {t}
@@ -29,7 +29,7 @@ export default function Courses() {
         </div>
       </div>
 
-      <div className="bg-[#f4f6f4]">
+      <div className="bg-[#F6F0E6]">
         <div className="w-full max-w-6xl mx-auto px-5 sm:px-8 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {list.map((c) => (
             <article key={c.id} className="bg-white rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-xl transition">
@@ -43,7 +43,7 @@ export default function Courses() {
                   <span>{c.lessons} Lessons</span>
                   <span>{c.students} students</span>
                 </div>
-                <button onClick={() => navigate(`/course/${c.id}`)} className="mt-4 w-full rounded-lg bg-[#0a4a3c] text-white text-[13px] font-bold py-2.5 hover:bg-[#0d5c4a] transition">
+                <button onClick={() => navigate(`/course/${c.id}`)} className="mt-4 w-full rounded-full bg-[#F5820B] text-white text-[13px] font-bold py-2.5 hover:bg-[#E06F00] transition">
                   View course
                 </button>
               </div>
