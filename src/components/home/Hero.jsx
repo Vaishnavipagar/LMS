@@ -4,7 +4,7 @@ import SmartImg from "../../lib/SmartImg";
 
 function CardShell({ children, className = "" }) {
   return (
-    <div className={`w-[210px] rounded-[6px] p-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)] ${className}`}>
+    <div className={`w-full rounded-[6px] p-3 shadow-[0_10px_30px_rgba(0,0,0,0.12)] ${className}`}>
       {children}
     </div>
   );
@@ -45,8 +45,8 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative h-[440px] sm:h-[500px] lg:h-[580px]">
-          <div className="absolute top-6 right-0 z-10 flex flex-col gap-2">
+        <div className="relative h-[420px] sm:h-[500px] lg:h-[580px]">
+          <div className="absolute top-6 right-0 z-10 flex flex-col gap-2 w-[160px] sm:w-[190px] lg:w-[210px]">
             <CardShell className="float-soft bg-gradient-to-br from-[#E6F7B5] to-[#D4F08A]">
               <div className="flex items-center gap-2">
                 <img src={H.avatarImg} alt="" className="w-7 h-7 shrink-0 rounded-full object-cover" />
@@ -82,7 +82,7 @@ export default function Hero() {
             remote={H.personFallback}
             alt={H.personAlt}
             eager
-            className="absolute bottom-[-24px] right-[100px] sm:right-[130px] z-20 h-[420px] sm:h-[500px] lg:h-[560px] w-auto max-w-none object-contain"
+            className="absolute bottom-[-24px] right-[150px] sm:right-[200px] lg:right-[220px] z-20 h-[400px] sm:h-[480px] lg:h-[560px] w-auto max-w-none object-contain"
           />
         </div>
       </div>

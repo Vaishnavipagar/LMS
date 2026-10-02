@@ -6,7 +6,6 @@ import { handleAnchorClick } from "../../lib/scroll";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const logged = typeof window !== "undefined" && !!localStorage.getItem("learnaxis_user");
 
   const go = (e, to) => {
     handleAnchorClick(e, to, navigate);
@@ -38,29 +37,18 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden md:flex items-center gap-6">
-          {logged ? (
-            <button
-              onClick={() => navigate("/courses")}
-              className="rounded-[6px] bg-[#111] text-white text-[14px] font-medium px-[18px] py-[10px] hover:bg-black transition"
-            >
-              Dashboard
-            </button>
-          ) : (
-            <>
-              <button
-                onClick={() => navigate("/login")}
-                className="text-black text-[14px] font-medium hover:opacity-70 transition"
-              >
-                Signup
-              </button>
-              <button
-                onClick={() => navigate("/login")}
-                className="rounded-[6px] bg-[#F59300] text-white text-[13px] font-medium px-[18px] py-[10px] hover:bg-[#E08600] transition shadow-[0_2px_8px_rgba(245,147,0,0.25)]"
-              >
-                Start Learning Free →
-              </button>
-            </>
-          )}
+          <button
+            onClick={() => navigate("/login")}
+            className="text-black text-[14px] font-medium hover:opacity-70 transition"
+          >
+            Signup
+          </button>
+          <button
+            onClick={() => navigate("/login")}
+            className="rounded-[6px] bg-[#F59300] text-white text-[13px] font-medium px-[18px] py-[10px] hover:bg-[#E08600] transition shadow-[0_2px_8px_rgba(245,147,0,0.25)]"
+          >
+            Start Learning Free →
+          </button>
         </div>
 
         <button onClick={() => setOpen(!open)} className="md:hidden text-[#111] text-2xl leading-none px-2" aria-label="menu">
@@ -80,16 +68,14 @@ export default function Navbar() {
             ))}
             <li className="flex flex-col gap-2.5 mt-2">
               <button
-                onClick={() => { setOpen(false); navigate(logged ? "/courses" : "/login"); }}
+                onClick={() => { setOpen(false); navigate("/login"); }}
                 className="w-full rounded-[6px] bg-[#F59300] text-white font-medium py-3 text-sm"
               >
-                {logged ? "Dashboard" : "Start Learning Free →"}
+                Start Learning Free →
               </button>
-              {!logged && (
-                <button onClick={() => { setOpen(false); navigate("/login"); }} className="w-full font-medium py-2 text-sm text-black">
-                  Signup
-                </button>
-              )}
+              <button onClick={() => { setOpen(false); navigate("/login"); }} className="w-full font-medium py-2 text-sm text-black">
+                Signup
+              </button>
             </li>
           </ul>
         </div>
