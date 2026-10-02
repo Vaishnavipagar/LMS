@@ -13,8 +13,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className="static w-full bg-[#FFF8F0]">
-      <nav className="w-full max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
+    <>
+    <header className="fixed top-0 left-0 w-full z-[100] bg-[#FFF8F0]">
+      <nav className="relative w-full max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
         <button
           onClick={() => navigate("/")}
           className="text-[#111] font-semibold text-[20px] tracking-normal shrink-0"
@@ -57,7 +58,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="md:hidden mx-4 mb-4 rounded-2xl bg-white p-6 shadow-[0_20px_50px_rgba(0,0,0,0.15)]">
+        <div className="md:hidden absolute top-full left-4 right-4 z-[110] rounded-2xl bg-white p-6 shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
           <ul className="flex flex-col gap-4">
             {NAV_LINKS.map((l) => (
               <li key={l.label}>
@@ -81,5 +82,9 @@ export default function Navbar() {
         </div>
       )}
     </header>
+      {/* In-flow spacer matching the navbar height so fixed positioning
+          never makes page content jump or slide underneath. */}
+      <div aria-hidden className="w-full h-[72px] bg-[#FFF8F0]" />
+    </>
   );
 }

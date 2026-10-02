@@ -12,7 +12,7 @@ export const HERO = {
     { value: "500+", labelLines: ["Expert", "Courses"] },
     { value: "92%", labelLines: ["Completion", "Rate"] },
   ],
-  personImg: "/images/hero-person.png",
+  personImg: "/images/hero.png",
   personFallback:
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&auto=format&fit=crop",
   personAlt: "Smiling student with a laptop",

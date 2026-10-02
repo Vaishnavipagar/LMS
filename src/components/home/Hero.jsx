@@ -82,7 +82,7 @@ export default function Hero() {
             remote={H.personFallback}
             alt={H.personAlt}
             eager
-            className="absolute bottom-[-24px] right-[150px] sm:right-[200px] lg:right-[220px] z-20 h-[400px] sm:h-[480px] lg:h-[560px] w-auto max-w-none object-contain"
+            className="absolute bottom-[-24px] right-[80px] sm:right-[110px] lg:right-[130px] z-20 h-[400px] sm:h-[480px] lg:h-[560px] w-auto max-w-none object-contain"
           />
         </div>
       </div>
