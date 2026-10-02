@@ -1,12 +1,14 @@
+import SmartImg from "../../lib/SmartImg";
+
 export default function DeskBanner() {
   return (
     <section className="bg-white">
       <div className="w-full">
-        <img
-          src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=1600&q=80&auto=format&fit=crop"
-          alt="Study desk with notebook, laptop and coffee"
-          loading="lazy"
-          className="block w-full h-56 sm:h-72 object-cover"
+        <SmartImg
+          local="/images/desk.jpg"
+          remote="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1600&q=80&auto=format&fit=crop"
+          alt="Bright study desk with green notebook, yellow mug and handwritten notes"
+          className="block w-full h-[380px] object-cover"
         />
       </div>
     </section>

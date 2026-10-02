@@ -13,13 +13,23 @@ html, body {
   overflow-x: hidden;
   background: #ffffff;
   color: #191817;
-  font-family: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 #root {
   width: 100%;
   min-height: 100%;
+}
+
+/* concentric arc lines for the green hero */
+.hero-rings {
+  background: repeating-radial-gradient(circle at 78% 45%, transparent 0 14px, rgba(255, 255, 255, 0.13) 14px 15px);
+}
+
+/* soft diagonal gradient for the LearnLoop hero */
+.hero-learnloop {
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFEED6 55%, #FFE3C4 100%);
 }
 
 /* gentle float for hero cards */

@@ -14,19 +14,22 @@ export default function Navbar() {
   };
 
   return (
-    <header className="static w-full bg-[#F6F0E6]">
+    <header className="static w-full bg-[#FFF8F0]">
       <nav className="w-full max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
-        <button onClick={() => navigate("/")} className="text-[#191817] font-extrabold text-[17px] tracking-tight shrink-0">
+        <button
+          onClick={() => navigate("/")}
+          className="text-[#111] font-semibold text-[20px] tracking-normal shrink-0"
+        >
           LearnLoop
         </button>
 
-        <ul className="hidden md:flex items-center gap-7">
+        <ul className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((l) => (
             <li key={l.label}>
               <Link
                 to={l.to}
                 onClick={(e) => go(e, l.to)}
-                className="text-[#191817]/70 hover:text-[#191817] text-[13px] font-medium transition whitespace-nowrap"
+                className="text-[#444] hover:text-[#111] text-[14px] font-normal transition whitespace-nowrap"
               >
                 {l.label}
               </Link>
@@ -34,30 +37,33 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden md:flex items-center gap-6">
           {logged ? (
             <button
               onClick={() => navigate("/courses")}
-              className="rounded-full bg-[#191817] text-white text-[13px] font-bold px-6 py-2.5 hover:bg-black transition"
+              className="rounded-[6px] bg-[#111] text-white text-[14px] font-medium px-[18px] py-[10px] hover:bg-black transition"
             >
               Dashboard
             </button>
           ) : (
             <>
-              <button onClick={() => navigate("/login")} className="text-[#191817]/70 hover:text-[#191817] text-[13px] font-medium transition">
+              <button
+                onClick={() => navigate("/login")}
+                className="text-black text-[14px] font-medium hover:opacity-70 transition"
+              >
                 Signup
               </button>
               <button
                 onClick={() => navigate("/login")}
-                className="rounded-full bg-[#F5820B] text-white text-[13px] font-bold px-6 py-2.5 hover:bg-[#E06F00] transition shadow-[0_8px_20px_rgba(245,130,11,0.35)]"
+                className="rounded-[6px] bg-[#F59300] text-white text-[13px] font-medium px-[18px] py-[10px] hover:bg-[#E08600] transition shadow-[0_2px_8px_rgba(245,147,0,0.25)]"
               >
-                Start Learning free
+                Start Learning Free →
               </button>
             </>
           )}
         </div>
 
-        <button onClick={() => setOpen(!open)} className="md:hidden text-[#191817] text-2xl leading-none px-2" aria-label="menu">
+        <button onClick={() => setOpen(!open)} className="md:hidden text-[#111] text-2xl leading-none px-2" aria-label="menu">
           {open ? "×" : "☰"}
         </button>
       </nav>
@@ -67,7 +73,7 @@ export default function Navbar() {
           <ul className="flex flex-col gap-4">
             {NAV_LINKS.map((l) => (
               <li key={l.label}>
-                <Link to={l.to} onClick={(e) => go(e, l.to)} className="text-[#191817] font-semibold text-[15px]">
+                <Link to={l.to} onClick={(e) => go(e, l.to)} className="text-[#111] font-medium text-[15px]">
                   {l.label}
                 </Link>
               </li>
@@ -75,12 +81,12 @@ export default function Navbar() {
             <li className="flex flex-col gap-2.5 mt-2">
               <button
                 onClick={() => { setOpen(false); navigate(logged ? "/courses" : "/login"); }}
-                className="w-full rounded-full bg-[#F5820B] text-white font-bold py-3 text-sm"
+                className="w-full rounded-[6px] bg-[#F59300] text-white font-medium py-3 text-sm"
               >
-                {logged ? "Dashboard" : "Start Learning free"}
+                {logged ? "Dashboard" : "Start Learning Free →"}
               </button>
               {!logged && (
-                <button onClick={() => { setOpen(false); navigate("/login"); }} className="w-full font-semibold py-2 text-sm text-[#191817]/70">
+                <button onClick={() => { setOpen(false); navigate("/login"); }} className="w-full font-medium py-2 text-sm text-black">
                   Signup
                 </button>
               )}
