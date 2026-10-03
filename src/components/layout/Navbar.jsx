@@ -5,11 +5,16 @@ import { handleAnchorClick } from "../../lib/scroll";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [onDark, setOnDark] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      // Dark theme only while the dark hero is still under the navbar;
+      // everywhere else (white sections) switch to dark text on white.
+      const hero = document.getElementById("home");
+      setOnDark(!!hero && hero.getBoundingClientRect().bottom > 80);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -24,27 +29,33 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 w-full z-[100] transition-colors duration-300 ${
-          scrolled ? "bg-[#0B2417]/92 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.35)]" : "bg-transparent"
+          onDark
+            ? "bg-transparent"
+            : "bg-white/95 backdrop-blur-md border-b border-black/10 shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
         }`}
       >
-        <nav className="relative w-full max-w-6xl mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
+        <nav className="relative w-full flex items-center px-5 sm:px-8 py-5">
           <button
             onClick={() => navigate("/")}
-            className="text-white font-semibold text-[20px] tracking-tight shrink-0 flex items-center gap-2"
+            className={`font-semibold text-[20px] tracking-tight shrink-0 flex items-center gap-2 transition-colors duration-300 ${
+              onDark ? "text-white" : "text-[#111]"
+            }`}
           >
-            <span className="w-6 h-6 rounded-full border-2 border-white/80 grid place-items-center text-[11px]">
+            <span className={`w-6 h-6 rounded-full border-2 grid place-items-center text-[11px] transition-colors duration-300 ${onDark ? "border-white/80" : "border-[#111]/80"}`}>
               ◐
             </span>
             LearnLoop
           </button>
 
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-8 ml-10 lg:ml-20">
             {NAV_LINKS.map((l) => (
               <li key={l.label}>
                 <Link
                   to={l.to}
                   onClick={(e) => go(e, l.to)}
-                  className="text-white/70 hover:text-white text-[14px] font-normal transition whitespace-nowrap"
+                  className={`text-[14px] font-normal transition whitespace-nowrap duration-300 ${
+                    onDark ? "text-white/70 hover:text-white" : "text-[#444] hover:text-black"
+                  }`}
                 >
                   {l.label}
                 </Link>
@@ -52,8 +63,8 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden md:flex items-center gap-5">
-            <span className="text-white/50 text-[12px] font-medium whitespace-nowrap">
+          <div className="hidden md:flex items-center gap-5 ml-auto">
+            <span className={`text-[12px] font-medium whitespace-nowrap transition-colors duration-300 ${onDark ? "text-white/50" : "text-black/50"}`}>
               Promo 20%
             </span>
             <button
@@ -64,7 +75,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <button onClick={() => setOpen(!open)} className="md:hidden text-white text-2xl leading-none px-2" aria-label="menu">
+          <button onClick={() => setOpen(!open)} className={`md:hidden ml-auto text-2xl leading-none px-2 transition-colors duration-300 ${onDark ? "text-white" : "text-[#111]"}`} aria-label="menu">
             {open ? "×" : "☰"}
           </button>
         </nav>

@@ -46,7 +46,7 @@ function Icon({ kind }) {
 
 export default function TrustedBy() {
   return (
-    <section className="bg-[#F5F2EA]">
+    <section className="bg-white">
       <div className="w-full max-w-6xl mx-auto px-5 sm:px-8 py-16 text-center">
         <span className="inline-block text-[10px] font-semibold tracking-[0.2em] text-[#111]/55 border border-black/15 rounded-full px-4 py-1.5">
           ALL IN ONE PLATFORM

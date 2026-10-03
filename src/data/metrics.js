@@ -12,8 +12,29 @@ export const WHO = {
   heading:
     "By combining thoughtful design with powerful technology, we build learning solutions that help students simplify study and achieve sustainable growth.",
   stats: [
-    { value: "92%", label: "Completion rate across active cohorts" },
-    { value: "4.8/5", label: "Average rating from verified learners" },
-    { value: "50K+", label: "Active learners growing every month" },
+    {
+      value: "92%",
+      badge: "+4.0%",
+      badgeTone: "purple",
+      desc: "(92%) Completion rate across active cohorts",
+      tag: "Completion Rate",
+      icon: "▲",
+    },
+    {
+      value: "64%",
+      badge: "+8.1%",
+      badgeTone: "green",
+      desc: "(64%) Skill growth reported by active learners",
+      tag: "Skill Growth",
+      icon: "⚡",
+    },
+    {
+      value: "50K+",
+      badge: null,
+      badgeTone: null,
+      desc: "(50K+) Active learners growing every month",
+      tag: "Active Learners",
+      icon: "●",
+    },
   ],
 };

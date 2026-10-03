@@ -1,9 +1,11 @@
 import { WHO as W } from "../../data/metrics";
+import SmartImg from "../../lib/SmartImg";
 
 export default function Metrics() {
   return (
     <section id="metrics" className="bg-white">
-      <div className="w-full max-w-6xl mx-auto px-5 sm:px-8 py-16 grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12">
+      <div className="w-full max-w-6xl mx-auto px-5 sm:px-8 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12">
         <div>
           {W.kickers.map((k) => (
             <p key={k} className="text-[10px] font-bold tracking-[0.18em] text-[#111]/40 flex items-center gap-2 mt-3 first:mt-0">
@@ -13,9 +15,12 @@ export default function Metrics() {
           ))}
 
           <div className="flex items-center gap-3 mt-8">
-            <span className="w-11 h-11 rounded-full bg-[#0B2417] text-white grid place-items-center text-[15px] font-bold">
-              R
-            </span>
+            <SmartImg
+              local="/images/hero.png"
+              remote="/images/hero.png"
+              alt={W.quote.name}
+              className="w-11 h-11 rounded-full object-cover object-top bg-[#0B2417]"
+            />
             <div>
               <p className="text-[13px] font-bold text-[#111]">{W.quote.name}</p>
               <p className="text-[11px] text-[#111]/50">{W.quote.role}</p>
@@ -35,20 +40,51 @@ export default function Metrics() {
           <h2 className="text-[24px] sm:text-[28px] font-medium tracking-tight text-[#111] leading-[1.35] max-w-[520px]">
             {W.heading}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-            {W.stats.map((s) => (
+        </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 items-start">
+            {W.stats.map((s, i) => (
               <div
-                key={s.label}
-                className="stripe-card rounded-2xl bg-[#111] text-white p-5 min-h-[150px] flex flex-col justify-between"
+                key={s.tag}
+                className={`rounded-[20px] overflow-hidden ${
+                  i === 2
+                    ? "stripe-card bg-black text-white min-h-[300px] md:min-h-[420px] p-6 flex flex-col"
+                    : "bg-white text-[#111] border border-black/10 shadow-[0_10px_30px_rgba(0,0,0,0.08)] min-h-[280px] md:min-h-[300px] flex flex-col"
+                } ${i === 1 ? "md:min-h-[360px]" : ""}`}
               >
-                <div className="text-[24px] font-semibold">
-                  {s.value} <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#b678f0] ml-1" />
+                {i === 0 && (
+                  <div className="stripe-card bg-black h-24 w-full" aria-hidden />
+                )}
+                {i === 1 && (
+                  <div className="stripe-card bg-black h-48 sm:h-52 w-full" aria-hidden />
+                )}
+                <div className={`flex items-center gap-3 ${i === 2 ? "mt-auto" : "p-6 pb-0"}`}>
+                  <span className={`text-[54px] font-semibold leading-none ${i === 2 ? "text-white" : "text-[#111]"}`}>
+                    {s.value}
+                  </span>
+                  {s.badge && (
+                    <span
+                      className={`text-[11px] font-bold rounded-full px-2.5 py-1 ${
+                        s.badgeTone === "green" ? "bg-[#8ac926] text-white" : "bg-[#b678f0] text-white"
+                      }`}
+                    >
+                      {s.badge}
+                    </span>
+                  )}
                 </div>
-                <p className="text-white/55 text-[11px] leading-snug mt-4">{s.label}</p>
+                <p className={`text-[13px] leading-snug px-6 mt-3 ${i === 2 ? "text-white/85" : "text-[#111]/80"}`}>
+                  {s.desc}
+                </p>
+                <div className="flex items-center gap-2 px-6 mt-auto pt-6 pb-6">
+                  <span className={`w-7 h-7 rounded-full grid place-items-center text-[12px] ${i === 2 ? "bg-white/15 text-white" : "bg-black/[0.06] text-[#111]/60"}`}>
+                    {s.icon}
+                  </span>
+                  <span className={`text-[12px] ${i === 2 ? "text-white/70" : "text-[#111]/50"}`}>{s.tag}</span>
+                </div>
               </div>
             ))}
           </div>
-        </div>
       </div>
     </section>
   );

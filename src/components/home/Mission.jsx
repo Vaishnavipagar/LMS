@@ -3,8 +3,8 @@ import SmartImg from "../../lib/SmartImg";
 
 export default function Mission() {
   return (
-    <section id="mission" className="bg-[#F5F2EA] px-3 sm:px-5 py-8">
-      <div className="bg-[#0B0B0C] rounded-[28px] text-white overflow-hidden">
+    <section id="mission" className="bg-black">
+      <div className="bg-black text-white overflow-hidden">
         <div className="w-full max-w-6xl mx-auto px-5 sm:px-8 py-14 text-center">
           <span className="inline-block text-[10px] font-semibold tracking-[0.2em] text-white/50 border border-white/15 rounded-full px-4 py-1.5">
             {M.pill}
