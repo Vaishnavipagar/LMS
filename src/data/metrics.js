@@ -1,13 +1,19 @@
-// EDIT METRICS SECTION ONLY HERE.
+// EDIT WHO-WE-ARE SECTION ONLY HERE.
 
-export const METRICS = {
-  eyebrow: "Metrics",
-  title: "The Numbers Speak for Themselves",
-  desc: "Every day, learners around the world trust LearnLoop to advance their skills and achieve their goals. Here's a glimpse of the impact we're making together as a community committed to continuous growth and excellence.",
+export const WHO = {
+  kickers: ["WHO WE ARE", "LEARNLOOP PLATFORM", "LEARN ANYWHERE, ANYTIME"],
+  quote: {
+    text: "The courses are clear, practical and perfectly paced. I finished the full track in two months and cracked my first frontend interview right after.",
+    name: "Rahul Verma",
+    role: "Full-Stack Learner",
+  },
+  trustedLabel: "Trusted by growing learners",
+  rating: "4.5",
+  heading:
+    "By combining thoughtful design with powerful technology, we build learning solutions that help students simplify study and achieve sustainable growth.",
   stats: [
-    { value: "2.5M+", label: "Educators Registered", bg: "#FFF0DC", icon: "🎓" },
-    { value: "1,200+", label: "Expert Tutors", bg: "#F6DDFA", icon: "👥" },
-    { value: "45,000+", label: "Certificates Earned", bg: "#F1FAD9", icon: "🏅" },
-    { value: "4.8/5", label: "Average Rating", bg: "#DFF1FB", icon: "💬" },
+    { value: "92%", label: "Completion rate across active cohorts" },
+    { value: "4.8/5", label: "Average rating from verified learners" },
+    { value: "50K+", label: "Active learners growing every month" },
   ],
 };

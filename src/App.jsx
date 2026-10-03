@@ -47,7 +47,7 @@ function HashScroll() {
 
 function HomePage() {
   return (
-    <main className="w-full bg-white">
+    <main className="w-full bg-[#F5F2EA]">
       <Navbar />
       <Hero />
       <TrustedBy />
@@ -62,7 +62,7 @@ function HomePage() {
 
 function SubPage({ children }) {
   return (
-    <main className="w-full bg-white min-h-screen">
+    <main className="w-full bg-[#F5F2EA] min-h-screen">
       <Navbar />
       {children}
       <Footer />
