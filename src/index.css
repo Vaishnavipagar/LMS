@@ -31,14 +31,14 @@ html, body {
    streaks over deep green-black) */
 .hero-forest {
   background:
-    radial-gradient(1000px 480px at 62% -8%, rgba(199, 216, 105, 0.30), transparent 65%),
-    radial-gradient(720px 520px at 86% 32%, rgba(150, 180, 70, 0.20), transparent 62%),
-    radial-gradient(900px 620px at 12% 108%, rgba(46, 92, 52, 0.28), transparent 60%),
-    radial-gradient(130% 95% at 50% 112%, rgba(0, 0, 0, 0.6), transparent 62%),
-    repeating-linear-gradient(90deg, rgba(205, 220, 115, 0.055) 0 3px, transparent 3px 18px, rgba(120, 150, 60, 0.05) 18px 26px, transparent 26px 48px),
-    repeating-linear-gradient(88deg, transparent 0 34px, rgba(190, 205, 95, 0.045) 34px 64px, transparent 64px 118px),
-    repeating-linear-gradient(91.5deg, transparent 0 70px, rgba(220, 230, 140, 0.03) 70px 92px, transparent 92px 170px),
-    linear-gradient(180deg, #0B2417 0%, #08170E 60%, #050E08 100%);
+    radial-gradient(1050px 500px at 58% -10%, rgba(206, 226, 112, 0.42), transparent 65%),
+    radial-gradient(760px 540px at 88% 30%, rgba(160, 190, 75, 0.30), transparent 62%),
+    radial-gradient(950px 640px at 10% 108%, rgba(52, 100, 55, 0.35), transparent 60%),
+    radial-gradient(130% 95% at 50% 112%, rgba(0, 0, 0, 0.55), transparent 62%),
+    repeating-linear-gradient(90deg, rgba(212, 226, 120, 0.085) 0 3px, transparent 3px 16px, rgba(130, 160, 65, 0.075) 16px 24px, transparent 24px 42px),
+    repeating-linear-gradient(88deg, transparent 0 28px, rgba(198, 212, 100, 0.07) 28px 56px, transparent 56px 104px),
+    repeating-linear-gradient(91.5deg, transparent 0 60px, rgba(225, 235, 145, 0.05) 60px 80px, transparent 80px 150px),
+    linear-gradient(180deg, #101F0D 0%, #0B1A09 60%, #060F06 100%);
 }
 
 /* diagonal pinstripes for dark stat cards */

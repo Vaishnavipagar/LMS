@@ -55,15 +55,12 @@ export default function Mission() {
 
             <div className="relative rounded-2xl overflow-hidden h-[300px]">
               <SmartImg
-                local={M.local}
-                remote={M.remote}
-                alt={M.imageAlt}
+                local="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80&auto=format&fit=crop"
+                remote="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80&auto=format&fit=crop"
+                alt="The Live LearnLoop Classroom"
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-              <span className="absolute top-4 right-4 text-[9px] font-bold tracking-widest text-white/90">
-                {M.photoChip}
-              </span>
               <p className="absolute bottom-4 left-4 right-4 text-[13px] font-semibold leading-snug">
                 {M.photoCaption2}
               </p>

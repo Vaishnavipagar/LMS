@@ -6,6 +6,7 @@ import { handleAnchorClick } from "../../lib/scroll";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [onDark, setOnDark] = useState(true);
+  const [promoLeft, setPromoLeft] = useState(12 * 60 + 7);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,8 +18,19 @@ export default function Navbar() {
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const timer = setInterval(() => {
+      setPromoLeft((s) => (s <= 0 ? 12 * 60 + 7 : s - 1));
+    }, 1000);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearInterval(timer);
+    };
   }, []);
+
+  const promoTime = [Math.floor(promoLeft / 3600)]
+    .concat([Math.floor((promoLeft % 3600) / 60), promoLeft % 60])
+    .map((n) => String(n).padStart(2, "0"))
+    .join(":");
 
   const go = (e, to) => {
     handleAnchorClick(e, to, navigate);
@@ -63,13 +75,17 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden md:flex items-center gap-5 ml-auto">
-            <span className={`text-[12px] font-medium whitespace-nowrap transition-colors duration-300 ${onDark ? "text-white/50" : "text-black/50"}`}>
-              Promo 20%
+          <div className="hidden md:flex items-center gap-3 ml-auto rounded-full bg-black/30 backdrop-blur-md border border-white/10 pl-2 pr-2 py-1.5">
+            <span className="w-8 h-8 shrink-0 rounded-full bg-white/15 grid place-items-center text-white text-[13px]">
+              ✳
+            </span>
+            <span className="leading-tight">
+              <span className="block text-white text-[13px] font-semibold whitespace-nowrap">Promo 20%</span>
+              <span className="block text-white/60 text-[10px] tabular-nums">{promoTime}</span>
             </span>
             <button
               onClick={() => navigate("/login")}
-              className="rounded-full bg-black text-white text-[13px] font-medium px-[20px] py-[10px] hover:bg-neutral-800 transition shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+              className="rounded-full bg-black text-white text-[13px] font-medium px-[20px] py-[10px] hover:bg-neutral-800 transition shadow-[0_4px_16px_rgba(0,0,0,0.4)] whitespace-nowrap"
             >
               Get Started
             </button>
