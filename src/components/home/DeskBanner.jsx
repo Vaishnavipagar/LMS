@@ -24,7 +24,7 @@ export default function DeskBanner() {
             onClick={() => navigate("/courses")}
             className="mt-7 rounded-full bg-black text-white text-[13px] font-medium px-7 py-3.5 hover:bg-neutral-800 transition"
           >
-            Join the waitlist
+            Browse courses
           </button>
 
           <div className="grid grid-cols-3 gap-4 mt-12 max-w-[560px]">

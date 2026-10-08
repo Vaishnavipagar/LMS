@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NAV_LINKS } from "../../data/navigation";
 import { handleAnchorClick } from "../../lib/scroll";
+import { GradCapIcon } from "../icons";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -43,8 +44,8 @@ export default function Navbar() {
               onDark ? "text-white" : "text-[#111]"
             }`}
           >
-            <span className={`w-6 h-6 rounded-full border-2 grid place-items-center text-[11px] transition-colors duration-300 ${onDark ? "border-white/80" : "border-[#111]/80"}`}>
-              ◐
+            <span className="w-7 h-7 rounded-full bg-[#F5820B] text-white grid place-items-center shrink-0">
+              <GradCapIcon size={14} />
             </span>
             LearnLoop
           </button>

@@ -21,9 +21,9 @@ export const HERO = {
   cards: [
     {
       tone: "lime",
-      title: "1:1 Couching Session",
+      title: "1:1 Coaching Session",
       desc: "Let's meet up with the quick 30 minutes meeting and resolve your problems.",
-      action: "Book a meeting",
+      action: "Book a free class",
       actionTo: "/courses",
       avatar: true,
     },

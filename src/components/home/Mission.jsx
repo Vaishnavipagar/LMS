@@ -1,5 +1,6 @@
 import { MISSION as M } from "../../data/mission";
 import SmartImg from "../../lib/SmartImg";
+import { SparkIcon, GradCapIcon } from "../icons";
 
 export default function Mission() {
   return (
@@ -22,11 +23,12 @@ export default function Mission() {
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-              <span className="absolute top-4 left-4 text-[10px] font-bold tracking-wide text-white bg-white/15 backdrop-blur rounded-full px-3 py-1.5">
-                ◐ {M.photoCaption}
+              <span className="absolute top-4 left-4 text-white bg-white/15 backdrop-blur rounded-full pl-2.5 pr-3 py-1.5 inline-flex items-center gap-1.5">
+                <GradCapIcon size={11} />
+                <span className="text-[10px] font-bold tracking-wide">{M.photoCaption}</span>
               </span>
-              <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/70 text-2xl">
-                ✳
+              <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/70">
+                <SparkIcon size={22} />
               </span>
             </div>
 
@@ -38,7 +40,9 @@ export default function Mission() {
               <div className="flex items-end gap-8 mt-5">
                 {M.greenCardStats.map((s) => (
                   <div key={s.label}>
-                    <div className="text-[30px] font-semibold leading-none">✳ {s.value}</div>
+                    <div className="text-[30px] font-semibold leading-none inline-flex items-center gap-2">
+                      <SparkIcon size={22} className="text-[#111]/70" /> {s.value}
+                    </div>
                     <div className="text-[11px] text-[#111]/60 mt-1.5">{s.label}</div>
                   </div>
                 ))}

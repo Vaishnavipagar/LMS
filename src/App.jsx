@@ -23,6 +23,10 @@ import DeskBanner from "./components/home/DeskBanner";
 import Login from "./pages/Login";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
+import Dashboard from "./pages/Dashboard";
+
+// ── Admin panel (edit: src/admin/*) — separate app, same Supabase project ──
+import AdminApp from "./admin/AdminApp";
 
 import { scrollToId } from "./lib/scroll";
 
@@ -79,6 +83,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/courses" element={<SubPage><Courses /></SubPage>} />
         <Route path="/course/:courseId" element={<SubPage><CourseDetail /></SubPage>} />
+        <Route path="/dashboard" element={<SubPage><Dashboard /></SubPage>} />
+        <Route path="/admin/*" element={<AdminApp />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </>

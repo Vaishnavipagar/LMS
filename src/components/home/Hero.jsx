@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { HERO as H } from "../../data/hero";
+import { SparkIcon } from "../icons";
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ export default function Hero() {
 
           <div className="w-[240px] space-y-4 text-white">
             <div className="flex items-start gap-3">
-              <span className="text-[#cfe08a] text-lg leading-none mt-0.5">✳</span>
+              <span className="text-[#cfe08a] leading-none mt-0.5"><SparkIcon size={18} /></span>
               <div>
                 <div className="text-[15px] font-semibold">92% Trusted</div>
                 <div className="text-white/55 text-[12px] mt-0.5">50k+ Active Learners</div>

@@ -33,7 +33,7 @@ export default function Benefits() {
                 onClick={() => navigate("/courses")}
                 className="mt-6 rounded-full bg-black text-white text-[13px] font-medium px-6 py-3 hover:bg-neutral-800 transition"
               >
-                Join the waitlist
+                Browse courses
               </button>
             </div>
           </div>

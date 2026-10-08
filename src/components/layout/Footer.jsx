@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FOOTER as F } from "../../data/footer";
+import { FacebookIcon, InstagramIcon, TelegramIcon } from "../icons";
+
+const SOCIAL_ICONS = {
+  Facebook: FacebookIcon,
+  Instagram: InstagramIcon,
+  Telegram: TelegramIcon,
+};
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -64,18 +71,21 @@ export default function Footer() {
         <div className="flex items-center justify-between mt-8">
           <p className="text-[11px] text-white/40">{F.copyright}</p>
           <div className="flex items-center gap-4">
-            {F.socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={s.label}
-                className="text-[12px] font-bold text-white/70 hover:text-white transition"
-              >
-                {s.glyph}
-              </a>
-            ))}
+            {F.socials.map((s) => {
+              const BrandIcon = SOCIAL_ICONS[s.label];
+              return (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={s.label}
+                  className="text-white/70 hover:text-white transition grid place-items-center w-6 h-6"
+                >
+                  {BrandIcon ? <BrandIcon size={14} /> : <span className="text-[12px] font-bold">{s.glyph}</span>}
+                </a>
+              );
+            })}
           </div>
         </div>
 

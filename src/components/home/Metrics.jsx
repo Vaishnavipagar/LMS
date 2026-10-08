@@ -1,5 +1,12 @@
 import { WHO as W } from "../../data/metrics";
 import SmartImg from "../../lib/SmartImg";
+import { TrendIcon, BoltIcon, DotIcon } from "../icons";
+
+const TAG_ICONS = {
+  "Completion Rate": TrendIcon,
+  "Skill Growth": BoltIcon,
+  "Active Learners": DotIcon,
+};
 
 export default function Metrics() {
   return (
@@ -77,9 +84,14 @@ export default function Metrics() {
                   {s.desc}
                 </p>
                 <div className="flex items-center gap-2 px-4 mt-auto pt-4 pb-4">
-                  <span className={`w-7 h-7 rounded-full grid place-items-center text-[12px] ${i === 2 ? "bg-white/15 text-white" : "bg-black/[0.06] text-[#111]/60"}`}>
-                    {s.icon}
-                  </span>
+                  {(() => {
+                    const TagIcon = TAG_ICONS[s.tag] || DotIcon;
+                    return (
+                      <span className={`w-7 h-7 rounded-full grid place-items-center ${i === 2 ? "bg-white/15 text-white" : "bg-black/[0.06] text-[#111]/60"}`}>
+                        <TagIcon size={12} />
+                      </span>
+                    );
+                  })()}
                   <span className={`text-[12px] ${i === 2 ? "text-white/70" : "text-[#111]/50"}`}>{s.tag}</span>
                 </div>
               </div>

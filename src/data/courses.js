@@ -13,7 +13,7 @@ export const HOME_COURSE_IDS = [
   "business-accounting",
   "finance-management",
   "app-design",
-  "genetic-testing",
+  "marketing-analytics",
   "web-design",
   "english-vocab",
 ];
